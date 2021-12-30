@@ -47,7 +47,7 @@ const Search = () => {
         </Form>
       </Formik>
 
-      {searchResult.length !== 0 && (
+      {searchResult.length !== 0 ? (
         <div className={classes.result}>
           {searchResult.map((el, i) => (
             <div
@@ -67,6 +67,8 @@ const Search = () => {
             </div>
           ))}
         </div>
+      ) : (
+        <div className={classes.emptyList}> Players was not found </div>
       )}
     </div>
   );

@@ -41,7 +41,7 @@ const Profile = () => {
   );
   console.log(profile);
   useEffect(() => {
-    let id = location.pathname.split("/")[3];
+    let id = location.pathname.split("/")[4];
     if (id) {
       console.log(id, "id");
 
