@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/myDotaBuff/static/css/main.dc27b145.css",
-    "main.js": "/myDotaBuff/static/js/main.35cab7da.js",
+    "main.css": "/myDotaBuff/static/css/main.a1820fc5.css",
+    "main.js": "/myDotaBuff/static/js/main.9b0886de.js",
     "static/js/787.e7ff9d75.chunk.js": "/myDotaBuff/static/js/787.e7ff9d75.chunk.js",
     "index.html": "/myDotaBuff/index.html",
-    "main.dc27b145.css.map": "/myDotaBuff/static/css/main.dc27b145.css.map",
-    "main.35cab7da.js.map": "/myDotaBuff/static/js/main.35cab7da.js.map",
+    "main.a1820fc5.css.map": "/myDotaBuff/static/css/main.a1820fc5.css.map",
+    "main.9b0886de.js.map": "/myDotaBuff/static/js/main.9b0886de.js.map",
     "787.e7ff9d75.chunk.js.map": "/myDotaBuff/static/js/787.e7ff9d75.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.dc27b145.css",
-    "static/js/main.35cab7da.js"
+    "static/css/main.a1820fc5.css",
+    "static/js/main.9b0886de.js"
   ]
 }
