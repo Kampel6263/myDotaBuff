@@ -4,32 +4,6 @@ import { useLocation } from "react-router-dom";
 import { State } from "../../../business-logic/redux/config";
 import { getProfile } from "../../../business-logic/redux/store";
 
-// {
-//     "tracked_until: string",
-//     "solo_competitive_rank: string",
-//     "competitive_rank: string",
-//     "rank_tier": 0,
-//     "leaderboard_rank": 0,
-//     "mmr_estimate": {
-//     "estimate": 0
-//     },
-//     "profile": {
-//     "account_id": 0,
-//     "personaname: string",
-//     "name: string",
-//     "plus": true,
-//     "cheese": 0,
-//     "steamid: string",
-//     "avatar: string",
-//     "avatarmedium: string",
-//     "avatarfull: string",
-//     "profileurl: string",
-//     "last_login: string",
-//     "loccountrycode: string",
-//     "is_contributor": false
-//     }
-//     }
-
 type ProfileProps = {
   account_id: number;
   personaname: string;
@@ -76,12 +50,17 @@ const Profile = () => {
     }
   }, []);
 
-  console.log(location, "navigate");
+  console.log(profile, "navigate");
   return (
     <div>
-      <img src={profile.profile.avatarfull} alt="" />
-      <div>Nick name: {profile.profile.personaname} </div>
-      <div> MMR: {profile.mmr_estimate.estimate} </div>
+      {profile.profile && (
+        <div>
+          {" "}
+          <img src={profile?.profile?.avatarfull} alt="" />
+          <div>Nick name: {profile?.profile?.personaname} </div>
+          <div> MMR: {profile?.mmr_estimate?.estimate} </div>
+        </div>
+      )}
     </div>
   );
 };
