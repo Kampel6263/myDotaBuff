@@ -7,19 +7,19 @@ const Navigation: React.FC = () => {
     <div className={classes.navigation}>
       <NavLink
         className={({ isActive }) => (isActive ? classes.active : "")}
-        to="/home"
+        to="/myDotaBuff/home"
       >
         Home
       </NavLink>
       <NavLink
         className={({ isActive }) => (isActive ? classes.active : "")}
-        to="/heroes"
+        to="/myDotaBuff/heroes"
       >
         Heroes
       </NavLink>
       <NavLink
         className={({ isActive }) => (isActive ? classes.active : "")}
-        to="/search"
+        to="/myDotaBuff/search"
       >
         Search
       </NavLink>

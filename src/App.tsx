@@ -22,14 +22,17 @@ const App = () => {
         {/* <BrowserRouter> */}
         <Navigation />
         <Routes>
-          <Route path="/" element={<Navigate replace to="/home" />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/heroes" element={<Heroes />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/search/profile/:id" element={<Profile />} />
           <Route
-            path="/search/profile/"
-            element={<Navigate replace to="/search" />}
+            path="/myDotaBuff"
+            element={<Navigate replace to="/myDotaBuff/home" />}
+          />
+          <Route path="/myDotaBuff/home" element={<Home />} />
+          <Route path="/myDotaBuff/heroes" element={<Heroes />} />
+          <Route path="/myDotaBuff/search" element={<Search />} />
+          <Route path="/myDotaBuff/search/profile/:id" element={<Profile />} />
+          <Route
+            path="/myDotaBuff/search/profile/"
+            element={<Navigate replace to="/myDotaBuff/search" />}
           />
         </Routes>
         {/* </BrowserRouter> */}
