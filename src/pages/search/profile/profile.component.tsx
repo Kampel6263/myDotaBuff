@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useLocation } from "react-router-dom";
@@ -8,6 +9,7 @@ import {
   getProfileRecentMatches,
 } from "../../../business-logic/redux/store";
 import { HeroeProps } from "../../heroes/heroes.component";
+import { useHeroesData } from "../../heroes/heroes.hook";
 import classes from "./profile.module.scss";
 
 type ProfileProps = {
@@ -82,11 +84,11 @@ const Profile = () => {
     } => state.general
   );
 
+  const { heroesImg } = useHeroesData();
+
   useEffect(() => {
     let id = location.pathname.split("/")[4];
     if (id) {
-      console.log(id, "id");
-      dispatch(getheroes());
       dispatch(getProfile(Number(id)));
       dispatch(getProfileRecentMatches(Number(id)));
     } else {
@@ -101,9 +103,8 @@ const Profile = () => {
   //   }
   // }, [heroes]);
 
-  console.log(state, "state");
+  console.log(profileRecentMatches);
 
-  console.log(profileRecentMatches, "navigate");
   return (
     <div>
       <Routes>
@@ -122,17 +123,42 @@ const Profile = () => {
                   {profileRecentMatches ? (
                     profileRecentMatches.map((el, i) => (
                       <div key={i} className={classes.recentTatches}>
-                        <img
-                          src={
-                            defaultLink +
-                            heroes
-                              .filter((itm) => itm.id === el.hero_id)[0]
-                              ?.localized_name.toLowerCase() +
-                            ".png"
-                          }
-                          alt=""
-                        />{" "}
-                        <div>2</div>
+                        <div className={classes.img}>
+                          <img
+                            src={
+                              heroesImg?.filter(
+                                (img) => img.id === el.hero_id
+                              )[0]?.src
+                            }
+                            alt=""
+                          />
+                          <div
+                            className={
+                              !el.party_size
+                                ? classNames(classes.heroName, classes.win)
+                                : classes.heroName
+                            }
+                          >
+                            {
+                              heroes.filter((itm) => itm.id === el.hero_id)[0]
+                                ?.localized_name
+                            }
+                          </div>
+                          <div>Normal skill</div>
+                        </div>
+
+                        <div>
+                          <div>
+                            Hero name:{" "}
+                            {
+                              heroes.filter((itm) => itm.id === el.hero_id)[0]
+                                ?.localized_name
+                            }
+                          </div>
+                          <div>
+                            KDA: {el.kills}/{el.deaths}/{el.assists}
+                          </div>
+                        </div>
                         <div>
                           {
                             heroes.filter((itm) => itm.id === el.hero_id)[0]

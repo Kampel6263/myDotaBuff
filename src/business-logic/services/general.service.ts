@@ -21,7 +21,6 @@ class GeneralService {
   public getHeroes = () => {
     return axios.get(`https://api.opendota.com/api/heroes`).then((res) => {
       const persons: any = res.data;
-      console.log(persons, "persons");
       return persons;
     });
   };
