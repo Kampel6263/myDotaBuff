@@ -2,7 +2,7 @@
   "name": "pet-prj",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://Kampel6263.github.io/myDotaBuff",
+  "homepage": "http://Kampel6263.github.io/myDotaBuff/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
     "@testing-library/jest-dom": "^5.16.1",
