@@ -41,13 +41,24 @@ class GeneralService {
       });
   };
 
-  public getProfileRecentMatch = (id: number) => {
-    return axios
-      .get(`https://api.opendota.com/api/players/${id}/recentMatches`)
+  public getProfileRecentMatch = async (id: number) => {
+    const winMatches: object[] | any = await axios
+      .get(`https://api.opendota.com/api/players/${id}/matches?limit=20&win=1`)
       .then((res) => {
-        const data: typeof res.data = res.data;
+        const data: object[] = res.data;
         return data;
       });
+    const losMatches: object[] | any = await axios
+      .get(`https://api.opendota.com/api/players/${id}/matches?limit=20&win=0`)
+      .then((res) => {
+        const data: object[] = res.data;
+        return data;
+      });
+    console.log(winMatches, losMatches, "ddsds");
+    return [
+      ...winMatches.map((el: any) => ({ ...el, win: true })),
+      ...losMatches,
+    ];
   };
 
   //   public fetchEl = (id) => {

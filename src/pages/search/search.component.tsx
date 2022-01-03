@@ -54,7 +54,7 @@ const Search = () => {
               key={i}
               className={classes.card}
               onClick={() => {
-                navigate(`/myDotaBuff/search/profile/${el.account_id}`);
+                navigate(`/search/profile/${el.account_id}`);
               }}
             >
               <img src={el.avatarfull} alt="" />
