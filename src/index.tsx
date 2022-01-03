@@ -31,7 +31,7 @@ const AppContent: React.FC = ({ children }) => {
 ReactDOM.render(
   <Provider store={store}>
     <AppContent>
-      <BrowserRouter>
+      <BrowserRouter basename="/myDotaBuff/">
         <App />
       </BrowserRouter>
     </AppContent>
