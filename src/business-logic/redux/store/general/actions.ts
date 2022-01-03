@@ -12,6 +12,10 @@ const search = make("[general] get people")
 const getProfile = make("[general] get profile")
   .stage((payload: number) => payload)
   .stage("submit", (payload: object) => payload);
+
+const getProfileRecentMatches = make("[general] get recent matches")
+  .stage((payload: number) => payload)
+  .stage("submit", (payload: object[]) => payload);
 // const getAllEl = make('[general] get all items')
 //   .stage((payload: { id: string }) => payload)
 //   .stage('submit', (payload: { id: string }) => payload);
@@ -35,4 +39,4 @@ const getProfile = make("[general] get profile")
 // const editProduct = make('[general] edit product')
 //   .stage((payload: { id: string; newValues: object; allData: object[] }) => payload)
 //   .stage('submit', (payload: { id: string; newValues: object; allData: object[] }) => payload);
-export { getheroes, search, getProfile };
+export { getheroes, search, getProfile, getProfileRecentMatches };

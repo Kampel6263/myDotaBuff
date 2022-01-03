@@ -1,6 +1,7 @@
 import { reducer } from "redux-chill";
 import { GeneralState } from "./state";
 import { getheroes, search, getProfile } from "./actions";
+import { getProfileRecentMatches } from ".";
 
 /**
  * general state
@@ -17,7 +18,13 @@ const general = reducer(new GeneralState())
 
   .on(getProfile.submit, (state: { profile: object }, payload: object) => {
     state.profile = payload;
-  });
+  })
+  .on(
+    getProfileRecentMatches.submit,
+    (state: { profileRecentMatches: object[] }, payload: object[]) => {
+      state.profileRecentMatches = payload;
+    }
+  );
 
 //   .on(addEl.sumbit, (state, payload) => {
 //     state.data = payload;

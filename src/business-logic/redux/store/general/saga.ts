@@ -2,7 +2,12 @@ import { Payload, Saga } from "redux-chill";
 import { put, call } from "redux-saga/effects";
 
 import { SagasContext } from "../../config/sagas-context";
-import { getheroes, getProfile, search } from "./actions";
+import {
+  getheroes,
+  getProfile,
+  search,
+  getProfileRecentMatches,
+} from "./actions";
 /**
  * general saga
  */
@@ -43,6 +48,23 @@ class GeneralSaga {
     } finally {
     }
   }
+  @Saga(getProfileRecentMatches)
+  public *getProfileRecentMatches(
+    payload: Payload<typeof getProfileRecentMatches>,
+    { api }: SagasContext
+  ) {
+    try {
+      const response: object[] = yield call(
+        api.general.getProfileRecentMatch,
+        payload
+      );
+      yield put(getProfileRecentMatches.submit(response));
+    } catch (error) {
+      console.log(error);
+    } finally {
+    }
+  }
+
   // @Saga(addEl)
   // public *addEl(payload: Payload<typeof addEl>, { api }: SagasContext) {
   //   try {

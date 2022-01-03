@@ -29,7 +29,10 @@ const App = () => {
           <Route path="/myDotaBuff/home/" element={<Home />} />
           <Route path="/myDotaBuff/heroes/" element={<Heroes />} />
           <Route path="/myDotaBuff/search/" element={<Search />} />
-          <Route path="/myDotaBuff/search/profile/:id" element={<Profile />} />
+          <Route
+            path="/myDotaBuff/search/profile/:id/*"
+            element={<Profile />}
+          />
           <Route
             path="/myDotaBuff/search/profile/"
             element={<Navigate replace to="/myDotaBuff/search" />}

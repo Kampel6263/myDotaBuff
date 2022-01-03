@@ -9,6 +9,7 @@ class GeneralState {
   public heroes: object[] = [];
   public searchResult: object[] = [];
   public profile: object = {};
+  public profileRecentMatches: object[] = [];
 }
 
 export { GeneralState };

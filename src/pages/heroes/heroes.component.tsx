@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { State } from "../../business-logic/redux/config";
 import { getheroes } from "../../business-logic/redux/store";
 import HeroAttr from "./hero-attr/hero-attr.component";
+import { useHeroesData } from "./heroes.hook";
 import classes from "./heroes.module.scss";
 
 export type HeroeProps = {
@@ -18,16 +19,9 @@ export type HeroeProps = {
 
 const Heroes: React.FC = () => {
   // const [heroes, setHeroes] = useState<HeroeProps[]>([])
-  const { heroes } = useSelector(
-    (state: State): { heroes: HeroeProps[] } => state.general
-  );
+  const { heroes } = useHeroesData();
 
   // console.log(heroes, "heroes");
-
-  // //  useSelector(heroes
-  // useEffect(() => {
-  //   console.log("firs render");
-  // }, []);
 
   return (
     <div className={classes.heroesPage}>
