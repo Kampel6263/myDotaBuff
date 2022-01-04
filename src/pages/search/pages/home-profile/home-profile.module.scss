@@ -4,26 +4,3 @@
   grid-template-columns: 1fr;
   row-gap: 20px;
 }
-
-.recentTatches {
-  display: grid;
-  grid-template-columns: 1.2fr repeat(4, 1fr);
-  grid-template-rows: auto;
-
-  .img {
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    column-gap: 10px;
-    img {
-      width: 80px;
-      opacity: 0.3;
-      grid-row: 2 span;
-    }
-    .heroName {
-      color: rgb(255, 211, 211);
-      &.win {
-        color: rgb(198, 252, 198);
-      }
-    }
-  }
-}

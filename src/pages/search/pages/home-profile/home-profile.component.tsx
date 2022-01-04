@@ -1,18 +1,18 @@
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes, useLocation } from "react-router-dom";
-import { State } from "../../../../business-logic/redux/config";
+import { useDispatch } from "react-redux";
+
 import {
-  getheroes,
   getProfile,
   getProfileRecentMatches,
 } from "../../../../business-logic/redux/store";
-import { HeroeProps } from "../../../heroes/heroes.component";
 import { useHeroesData } from "../../../heroes/heroes.hook";
 import classes from "./home-profile.module.scss";
 
-type ProfileProps = {
+import { UseHomeProfileData } from "./home.hook";
+import MatchItem from "../../../../components/match-item/match-item.component";
+
+export type ProfileProps = {
   account_id: number;
   personaname: string;
   name: string;
@@ -28,7 +28,7 @@ type ProfileProps = {
   is_contributor: boolean;
 };
 
-type allProfileProps = {
+export type allProfileProps = {
   tracked_until: string;
   solo_competitive_rank: string;
   competitive_rank: string;
@@ -38,7 +38,7 @@ type allProfileProps = {
   profile: ProfileProps;
 };
 
-type ProfileRecentMatches = {
+export type ProfileRecentMatches = {
   assists: number;
   cluster: number;
   deaths: number;
@@ -67,32 +67,21 @@ type ProfileRecentMatches = {
   win?: boolean;
 };
 
-const HomeProfile: React.FC<{ id: string }> = ({ id }) => {
+type HomeProfileProps = {
+  id: string;
+};
+
+const HomeProfile: React.FC<HomeProfileProps> = ({ id }) => {
   const dispatch = useDispatch();
 
-  const { profile, profileRecentMatches, heroes } = useSelector(
-    (
-      state: State
-    ): {
-      profile: allProfileProps;
-      profileRecentMatches: ProfileRecentMatches[];
-      heroes: HeroeProps[];
-    } => state.general
-  );
-
-  const { heroesImg } = useHeroesData();
+  const { profileRecentMatches, profile, maxDuration } = UseHomeProfileData();
 
   useEffect(() => {
     if (id) {
       dispatch(getProfile(Number(id)));
       dispatch(getProfileRecentMatches(Number(id)));
-    } else {
     }
   }, []);
-  // console.log(
-  //   profileRecentMatches[0]?.start_time + profileRecentMatches[1]?.start_time
-  // );
-  // console.log(profileRecentMatches.sort((a, b) => a.deaths - b.deaths));
 
   return (
     <div>
@@ -103,59 +92,13 @@ const HomeProfile: React.FC<{ id: string }> = ({ id }) => {
           <div> MMR: {profile?.mmr_estimate?.estimate} </div>
           <div className={classes.matches}>
             {profileRecentMatches ? (
-              [...profileRecentMatches]
-                .sort((a, b) => {
-                  if (a.start_time < b.start_time) {
-                    return 1;
-                  }
-                  if (a.start_time > b.start_time) {
-                    return -1;
-                  }
-                  return 0;
-                })
-                .map((el, i) => (
-                  <div key={i} className={classes.recentTatches}>
-                    <div className={classes.img}>
-                      <img
-                        src={
-                          heroesImg?.filter((img) => img.id === el.hero_id)[0]
-                            ?.src
-                        }
-                        alt=""
-                      />
-                      <div
-                        className={
-                          !el.win
-                            ? classNames(classes.heroName, classes.win)
-                            : classes.heroName
-                        }
-                      >
-                        {
-                          heroes.filter((itm) => itm.id === el.hero_id)[0]
-                            ?.localized_name
-                        }
-                      </div>
-                      <div>Normal skill</div>
-                    </div>
-
-                    <div>
-                      <div>{el.start_time}</div>
-                      <div>
-                        KDA: {el.kills}/{el.deaths}/{el.assists}
-                      </div>
-                    </div>
-                    <div>
-                      Gpm: {el.gold_per_min}
-                      <br />
-                      Xpm: {el.xp_per_min}
-                    </div>
-                    <div>
-                      Damage: {el.hero_damage} <br /> Tower Damage:{" "}
-                      {el.tower_damage}
-                    </div>
-                    <div>Crips: {el.last_hits}</div>
-                  </div>
-                ))
+              profileRecentMatches.map((el, i) => (
+                <MatchItem
+                  matchDetails={el}
+                  maxDuration={maxDuration}
+                  key={i}
+                />
+              ))
             ) : (
               <div>Recent matches was not found</div>
             )}

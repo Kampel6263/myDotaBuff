@@ -9,12 +9,12 @@ const Profile = () => {
   return (
     <div>
       <div className="">
-        <NavLink
+        {/* <NavLink
           className={({ isActive }) => (isActive ? "" : "")}
           to={`/search/profile/${id}/test`}
         >
           Matches
-        </NavLink>
+        </NavLink> */}
       </div>
       <Routes>
         <Route path="/" element={<HomeProfile id={id} />} />

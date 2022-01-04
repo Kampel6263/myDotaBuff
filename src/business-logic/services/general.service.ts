@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ProfileRecentMatches } from "../../pages/search/pages/home-profile/home-profile.component";
 import { HttpService } from "./http";
 
 // const allEl = [];
@@ -42,23 +43,55 @@ class GeneralService {
   };
 
   public getProfileRecentMatch = async (id: number) => {
-    const winMatches: object[] | any = await axios
-      .get(`https://api.opendota.com/api/players/${id}/matches?limit=20&win=1`)
+    // const winMatches: object[] | any = await axios
+    //   .get(`https://api.opendota.com/api/players/${id}/matches?limit=20&win=1`)
+    //   .then((res) => {
+    //     const data: object[] = res.data;
+    //     return data;
+    //   });
+    // const losMatches: object[] | any = await axios
+    //   .get(`https://api.opendota.com/api/players/${id}/matches?limit=20&win=0`)
+    //   .then((res) => {
+    //     const data: object[] = res.data;
+    //     return data;
+    //   });
+    // console.log(winMatches, losMatches, "ddsds");
+    // return [
+    //   ...winMatches.map((el: any) => ({ ...el, win: true })),
+    //   ...losMatches,
+    // ].sort((a, b) => {
+    //   if (a.start_time < b.start_time) {
+    //     return 1;
+    //   }
+    //   if (a.start_time > b.start_time) {
+    //     return -1;
+    //   }
+    //   return 0;
+    // });
+
+    const matches = await axios
+      .get(`https://api.opendota.com/api/players/${id}/matches?limit=15`)
       .then((res) => {
-        const data: object[] = res.data;
+        const data: ProfileRecentMatches[] = res.data;
         return data;
       });
-    const losMatches: object[] | any = await axios
-      .get(`https://api.opendota.com/api/players/${id}/matches?limit=20&win=0`)
+
+    const winMatches = await axios
+      .get(`https://api.opendota.com/api/players/${id}/matches?limit=15&win=1`)
       .then((res) => {
-        const data: object[] = res.data;
+        const data: ProfileRecentMatches[] = res.data;
         return data;
       });
-    console.log(winMatches, losMatches, "ddsds");
-    return [
-      ...winMatches.map((el: any) => ({ ...el, win: true })),
-      ...losMatches,
-    ];
+
+    return matches.map((el, i) => {
+      let isWin = false;
+      for (let i = 0; i < winMatches.length; i++) {
+        if (el.match_id === winMatches[i].match_id) {
+          isWin = true;
+        }
+      }
+      return isWin ? { ...el, win: true } : el;
+    });
   };
 
   //   public fetchEl = (id) => {
