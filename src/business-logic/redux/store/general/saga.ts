@@ -1,5 +1,6 @@
 import { Payload, Saga } from "redux-chill";
 import { put, call } from "redux-saga/effects";
+import { getMatch } from ".";
 
 import { SagasContext } from "../../config/sagas-context";
 import {
@@ -61,6 +62,16 @@ class GeneralSaga {
       yield put(getProfileRecentMatches.submit(response));
     } catch (error) {
       console.log(error);
+    } finally {
+    }
+  }
+
+  @Saga(getMatch)
+  public *getMatch(payload: Payload<typeof getMatch>, { api }: SagasContext) {
+    try {
+      const response: object = yield call(api.general.getMatch, payload);
+      yield put(getMatch.submit(response));
+    } catch (error) {
     } finally {
     }
   }

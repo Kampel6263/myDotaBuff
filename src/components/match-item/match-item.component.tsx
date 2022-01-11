@@ -8,6 +8,7 @@ import { ProfileRecentMatches } from "../../pages/search/pages/home-profile/home
 import classes from "./match-item.module.scss";
 
 import * as dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 declare module "dayjs" {
   interface Dayjs {
@@ -27,7 +28,7 @@ type MatchItemProps = {
 
 const MatchItem: React.FC<MatchItemProps> = ({ matchDetails, maxDuration }) => {
   const { heroesImg } = useHeroesData();
-
+  const navigate = useNavigate();
   const { heroes } = useSelector(
     (
       state: State
@@ -40,6 +41,7 @@ const MatchItem: React.FC<MatchItemProps> = ({ matchDetails, maxDuration }) => {
 
   return (
     <div
+      onClick={() => navigate(`/match/${matchDetails.match_id}`)}
       className={
         matchDetails.win
           ? classes.recentTatches

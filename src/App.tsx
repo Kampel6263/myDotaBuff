@@ -13,6 +13,7 @@ import Heroes from "./pages/heroes/heroes.component";
 import Navigation from "./components/navigation/navigation.component";
 import Search from "./pages/search/search.component";
 import Profile from "./pages/search/pages/profile.component";
+import Match from "./pages/match/match.component";
 // import Profile from "./pages/search/pages/";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -32,6 +33,7 @@ const App = () => {
             path="/search/profile/"
             element={<Navigate replace to="/search" />}
           />
+          <Route path="/match/:id" element={<Match />} />
         </Routes>
         {/* </BrowserRouter> */}
       </div>

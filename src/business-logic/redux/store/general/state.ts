@@ -10,6 +10,7 @@ class GeneralState {
   public searchResult: object[] = [];
   public profile: object = {};
   public profileRecentMatches: object[] = [];
+  public matchDetails: object = {};
 }
 
 export { GeneralState };
