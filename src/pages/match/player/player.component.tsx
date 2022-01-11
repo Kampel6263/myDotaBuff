@@ -37,7 +37,7 @@ const Player: React.FC<PlayerProps> = ({ el, columsName, index }) => {
         <img
           src={heroesImg.filter((hero) => hero.id === el.hero_id)[0]?.src}
           alt={
-            heroes.filter((hero) => hero.id === el.hero_id)[0].localized_name
+            heroes.filter((hero) => hero.id === el.hero_id)[0]?.localized_name
           }
         />
       </div>
