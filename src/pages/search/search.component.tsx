@@ -1,12 +1,15 @@
 import axios from "axios";
 import { Field, Form, Formik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { State } from "../../business-logic/redux/config";
 import { search } from "../../business-logic/redux/store";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import classes from "./search.module.scss";
+import { PreloaderEnum } from "../../types/preloader";
+import Preloader from "../../components/preloader/preloader.coponent";
+import { useSearchData } from "./search.hook";
 
 type SearchResultProps = {
   account_id: number;
@@ -24,14 +27,24 @@ type initialValuesProps = {
 
 const Search = () => {
   const dispatch = useDispatch();
-  const handleSubmit = (values: initialValuesProps) => {
-    dispatch(search(values.text));
-  };
   const navigate = useNavigate();
-
-  const { searchResult } = useSelector(
-    (state: State): { searchResult: SearchResultProps[] } => state.general
+  const location = useLocation();
+  const name = location.pathname.split("/")[2];
+  const handleSubmit = (values: initialValuesProps) => {
+    navigate(`/search/${values.text}`);
+  };
+  const { searchResult, showPreloader } = useSelector(
+    (
+      state: State
+    ): { searchResult: SearchResultProps[]; showPreloader: number | null } =>
+      state.general
   );
+  const { searchShema } = useSearchData();
+  useEffect(() => {
+    if (name) {
+      dispatch(search(name));
+    }
+  }, [name]);
 
   const initialValues: initialValuesProps = {
     text: "",
@@ -40,35 +53,49 @@ const Search = () => {
   return (
     <div className={classes.search}>
       <h2>Search</h2>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        <Form>
-          <Field id="text" name="text" placeholder="Name" />
-          <button type="submit">Submit</button>
-        </Form>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={searchShema}
+        onSubmit={handleSubmit}
+      >
+        {({ errors, touched }) => (
+          <Form>
+            <Field id="text" name="text" placeholder="Nick name" />
+            <button disabled={!!errors.text} type="submit">
+              Submit
+            </button>
+            <div className={classes.error}>{touched.text && errors.text}</div>
+          </Form>
+        )}
       </Formik>
-
-      {searchResult.length !== 0 ? (
-        <div className={classes.result}>
-          {searchResult.map((el, i) => (
-            <div
-              key={i}
-              className={classes.card}
-              onClick={() => {
-                navigate(`/search/profile/${el.account_id}`);
-              }}
-            >
-              <img src={el.avatarfull} alt="" />
-              <div>{el.personaname}</div>
-              <div>
-                {el.last_match_time
-                  ? el.last_match_time
-                  : "Never been play Dota 2"}
-              </div>
-            </div>
-          ))}
-        </div>
+      {showPreloader === PreloaderEnum.SearchResult ? (
+        <Preloader />
       ) : (
-        <div className={classes.emptyList}> Players was not found </div>
+        <React.Fragment>
+          {searchResult.length !== 0 && name ? (
+            <div className={classes.result}>
+              {searchResult.map((el, i) => (
+                <div
+                  key={i}
+                  className={classes.card}
+                  onClick={() => {
+                    navigate(`/profile/${el.account_id}`);
+                  }}
+                >
+                  <img src={el.avatarfull} alt="" />
+                  <div>{el.personaname}</div>
+                  <div>
+                    {el.last_match_time
+                      ? el.last_match_time
+                      : "Never been play Dota 2"}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className={classes.emptyList}> Players was not found </div>
+          )}
+        </React.Fragment>
       )}
     </div>
   );

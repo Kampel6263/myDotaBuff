@@ -21,4 +21,15 @@ const getMatch = make("[general get match details]")
   .stage((payload: string) => payload)
   .stage("submit", (payload: object) => payload);
 
-export { getheroes, search, getProfile, getProfileRecentMatches, getMatch };
+const preloader = make("[general] show preloader")
+  .stage("show", (payload: number) => payload)
+  .stage("hide");
+
+export {
+  getheroes,
+  search,
+  getProfile,
+  getProfileRecentMatches,
+  getMatch,
+  preloader,
+};

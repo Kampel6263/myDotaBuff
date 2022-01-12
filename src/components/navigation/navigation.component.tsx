@@ -5,12 +5,12 @@ import classes from "./navigation.module.scss";
 const Navigation: React.FC = () => {
   return (
     <div className={classes.navigation}>
-      <NavLink
+      {/* <NavLink
         className={({ isActive }) => (isActive ? classes.active : "")}
         to="/home/"
       >
         Home
-      </NavLink>
+      </NavLink> */}
       <NavLink
         className={({ isActive }) => (isActive ? classes.active : "")}
         to="/heroes/"

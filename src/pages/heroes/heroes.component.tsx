@@ -1,8 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { State } from "../../business-logic/redux/config";
-import { getheroes } from "../../business-logic/redux/store";
+import React from "react";
+import Preloader from "../../components/preloader/preloader.coponent";
+import { PreloaderEnum } from "../../types/preloader";
 import HeroAttr from "./hero-attr/hero-attr.component";
 import { useHeroesData } from "./heroes.hook";
 import classes from "./heroes.module.scss";
@@ -15,13 +13,17 @@ export type HeroeProps = {
   name: string;
   primary_attr: "int" | "str" | "agi";
   roles: string[];
+  img: string;
 };
 
 const Heroes: React.FC = () => {
   // const [heroes, setHeroes] = useState<HeroeProps[]>([])
-  const { heroes } = useHeroesData();
+  const { heroes, showPreloader } = useHeroesData();
 
   // console.log(heroes, "heroes");
+  if (showPreloader === PreloaderEnum.GetHeroes) {
+    return <Preloader />;
+  }
 
   return (
     <div className={classes.heroesPage}>

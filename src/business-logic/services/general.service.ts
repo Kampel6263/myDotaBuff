@@ -34,12 +34,19 @@ class GeneralService {
       });
   };
 
-  public getProfile = (id: number) => {
-    return axios
-      .get(`https://api.opendota.com/api/players/${id}`)
-      .then((res) => {
-        return res.data;
-      });
+  public getProfile = async (id: number) => {
+    return {
+      profile: await axios
+        .get(`https://api.opendota.com/api/players/${id}`)
+        .then((res) => {
+          return res.data;
+        }),
+      winRate: await axios
+        .get(`https://api.opendota.com/api/players/${id}/wl`)
+        .then((res) => {
+          return res.data;
+        }),
+    };
   };
 
   public getProfileRecentMatch = async (id: number) => {

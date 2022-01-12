@@ -33,18 +33,19 @@ const Player: React.FC<PlayerProps> = ({ el, columsName, index }) => {
           : classNames(classes.player, classes.grey)
       }
     >
-      <div>
+      <div className={classes.heroImg}>
         <img
           src={heroesImg.filter((hero) => hero.id === el.hero_id)[0]?.src}
           alt={
             heroes.filter((hero) => hero.id === el.hero_id)[0]?.localized_name
           }
         />
+        <div>{el.level}</div>
       </div>
       <div
         onClick={() => {
           if (el.account_id) {
-            navigate(`/search/profile/${el.account_id}`);
+            navigate(`/profile/${el.account_id}`);
           }
         }}
         className={el.account_id ? classes.activeId : ""}

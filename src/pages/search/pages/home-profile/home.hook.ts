@@ -7,14 +7,23 @@ import {
   ProfileRecentMatches,
 } from "./home-profile.component";
 
+type ProfileType = {
+  profile: allProfileProps;
+  winRate: {
+    win: number;
+    lose: number;
+  };
+};
+
 const UseHomeProfileData = () => {
-  const { profile, profileRecentMatches, heroes } = useSelector(
+  const { profile, profileRecentMatches, heroes, showPreloader } = useSelector(
     (
       state: State
     ): {
-      profile: allProfileProps;
+      profile: ProfileType;
       profileRecentMatches: ProfileRecentMatches[];
       heroes: HeroeProps[];
+      showPreloader: number | null;
     } => state.general
   );
 
@@ -22,7 +31,7 @@ const UseHomeProfileData = () => {
     return Math.max(a, b.duration);
   }, 0);
 
-  return { profile, profileRecentMatches, heroes, maxDuration };
+  return { profile, profileRecentMatches, heroes, maxDuration, showPreloader };
 };
 
 export { UseHomeProfileData };

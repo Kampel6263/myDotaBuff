@@ -11,6 +11,7 @@ class GeneralState {
   public profile: object = {};
   public profileRecentMatches: object[] = [];
   public matchDetails: object = {};
+  public showPreloader: number | null = null;
 }
 
 export { GeneralState };

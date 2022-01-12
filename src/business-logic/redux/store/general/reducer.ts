@@ -1,6 +1,6 @@
 import { reducer } from "redux-chill";
 import { GeneralState } from "./state";
-import { getheroes, search, getProfile } from "./actions";
+import { getheroes, search, getProfile, preloader } from "./actions";
 import { getMatch, getProfileRecentMatches } from ".";
 
 /**
@@ -27,6 +27,16 @@ const general = reducer(new GeneralState())
   )
   .on(getMatch.submit, (state: { matchDetails: object }, payload: object) => {
     state.matchDetails = payload;
+  })
+
+  .on(
+    preloader.show,
+    (state: { showPreloader: number | null }, payload: number) => {
+      state.showPreloader = payload;
+    }
+  )
+  .on(preloader.hide, (state: { showPreloader: number | null }) => {
+    state.showPreloader = null;
   });
 
 //   .on(addEl.sumbit, (state, payload) => {

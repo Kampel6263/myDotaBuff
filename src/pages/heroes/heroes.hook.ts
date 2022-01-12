@@ -9,8 +9,9 @@ type HeroesImgProps = {
 };
 
 const useHeroesData = () => {
-  const { heroes } = useSelector(
-    (state: State): { heroes: HeroeProps[] } => state.general
+  const { heroes, showPreloader } = useSelector(
+    (state: State): { heroes: HeroeProps[]; showPreloader: number | null } =>
+      state.general
   );
   const baseUrl =
     "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/";
@@ -58,8 +59,32 @@ const useHeroesData = () => {
         case "Underlord":
           pushImg(el.id, "abyssal_underlord");
           break;
-        case "Io":
-          pushImg(el.id, "wisp");
+        case "Shadow Fiend":
+          pushImg(el.id, "nevermore");
+          break;
+        case "Vengeful Spirit":
+          pushImg(el.id, "vengefulspirit");
+          break;
+        case "Windranger":
+          pushImg(el.id, "windrunner");
+          break;
+        case "Zeus":
+          pushImg(el.id, "zuus");
+          break;
+        case "Necrophos":
+          pushImg(el.id, "necrolyte");
+          break;
+        case "Queen of Pain":
+          pushImg(el.id, "queenofpain");
+          break;
+        case "Nature's Prophet":
+          pushImg(el.id, "furion");
+          break;
+        case "Outworld Destroyer":
+          pushImg(el.id, "obsidian_destroyer");
+          break;
+        case "Keeper of the Light":
+          pushImg(el.id, "keeper_of_the_light");
           break;
         default:
           pushImg(
@@ -70,7 +95,7 @@ const useHeroesData = () => {
     }
   }
 
-  return { heroes, heroesImg };
+  return { heroes, heroesImg, showPreloader };
 };
 
 export { useHeroesData };

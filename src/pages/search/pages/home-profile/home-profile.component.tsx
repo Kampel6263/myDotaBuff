@@ -1,16 +1,19 @@
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-
+import Animated from "../../../../assets/animation/Blocks.svg";
 import {
   getProfile,
   getProfileRecentMatches,
+  preloader,
 } from "../../../../business-logic/redux/store";
 import { useHeroesData } from "../../../heroes/heroes.hook";
 import classes from "./home-profile.module.scss";
 
 import { UseHomeProfileData } from "./home.hook";
 import MatchItem from "../../../../components/match-item/match-item.component";
+import Preloader from "../../../../components/preloader/preloader.coponent";
+import { PreloaderEnum } from "../../../../types/preloader";
 
 export type ProfileProps = {
   account_id: number;
@@ -74,22 +77,47 @@ type HomeProfileProps = {
 const HomeProfile: React.FC<HomeProfileProps> = ({ id }) => {
   const dispatch = useDispatch();
 
-  const { profileRecentMatches, profile, maxDuration } = UseHomeProfileData();
+  const { profileRecentMatches, profile, maxDuration, showPreloader } =
+    UseHomeProfileData();
 
   useEffect(() => {
     if (id) {
       dispatch(getProfile(Number(id)));
       dispatch(getProfileRecentMatches(Number(id)));
     }
-  }, []);
+  }, [id]);
 
+  const winRate = String(
+    (profile.winRate?.win / (profile.winRate?.win + profile.winRate?.lose)) *
+      100
+  ).slice(0, 5);
+
+  if (showPreloader === PreloaderEnum.Profile) {
+    return <Preloader />;
+  }
   return (
     <div>
-      {profile.profile ? (
+      {profile.profile && profile.winRate ? (
         <div>
-          <img src={profile?.profile?.avatarfull} alt="" />
-          <div>Nick name: {profile?.profile?.personaname} </div>
-          <div> MMR: {profile?.mmr_estimate?.estimate} </div>
+          <div className={classes.header}>
+            <img src={profile?.profile.profile?.avatarfull} alt="" />
+            <div>ID: {profile.profile.profile.account_id}</div>
+            <div>Nick name: {profile?.profile.profile?.personaname} </div>
+            <div> MMR: {profile?.profile.mmr_estimate?.estimate} </div>
+            <div>Win: {profile?.winRate.win}</div>
+            <div>Lose: {profile?.winRate.lose}</div>
+
+            <div
+              style={{
+                color: `rgb(${255 * ((100 - Number(winRate)) / 100)}, ${
+                  255 * (Number(winRate) / 100)
+                }, 0 )`,
+              }}
+            >
+              Win rate: {winRate}%
+            </div>
+          </div>
+
           <div className={classes.matches}>
             {profileRecentMatches ? (
               profileRecentMatches.map((el, i) => (

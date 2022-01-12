@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { State } from "../../business-logic/redux/config";
 import { getMatch } from "../../business-logic/redux/store/general";
+import Preloader from "../../components/preloader/preloader.coponent";
+import { PreloaderEnum } from "../../types/preloader";
 import { useHeroesData } from "../heroes/heroes.hook";
 import { matchDetail } from "./match.hook";
 import classes from "./match.module.scss";
@@ -16,8 +18,11 @@ const Match = () => {
 
   const dispatch = useDispatch();
 
-  const { matchDetails } = useSelector(
-    (state: State): { matchDetails: matchDetail } => state.general
+  const { matchDetails, showPreloader } = useSelector(
+    (
+      state: State
+    ): { matchDetails: matchDetail; showPreloader: number | null } =>
+      state.general
   );
 
   console.log(matchDetails, "det");
@@ -41,8 +46,8 @@ const Match = () => {
     }
   }, []);
 
-  if (!matchDetails) {
-    return <div>loading...</div>;
+  if (showPreloader === PreloaderEnum.MatchDetail) {
+    return <Preloader />;
   }
 
   return (

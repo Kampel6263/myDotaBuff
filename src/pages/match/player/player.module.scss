@@ -20,3 +20,18 @@
 .netWorth {
   color: rgb(255, 205, 66);
 }
+
+.heroImg {
+  position: relative;
+  img {
+    height: 100%;
+    display: block;
+  }
+  div {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1px 4px;
+  }
+}

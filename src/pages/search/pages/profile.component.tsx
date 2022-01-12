@@ -4,22 +4,19 @@ import HomeProfile from "./home-profile/home-profile.component";
 
 const Profile = () => {
   const location = useLocation();
-  let id = location.pathname.split("/")[3];
+  let id = location.pathname.split("/")[2];
 
   return (
     <div>
-      <div className="">
-        {/* <NavLink
+      {/* <div className="">
+        <NavLink
           className={({ isActive }) => (isActive ? "" : "")}
           to={`/search/profile/${id}/test`}
         >
           Matches
-        </NavLink> */}
-      </div>
-      <Routes>
-        <Route path="/" element={<HomeProfile id={id} />} />
-        <Route path="/test" element={<div>{id}</div>} />
-      </Routes>
+        </NavLink>
+      </div> */}
+      <HomeProfile id={id} />
     </div>
   );
 };

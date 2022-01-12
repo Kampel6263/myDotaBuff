@@ -1,6 +1,7 @@
 import { Payload, Saga } from "redux-chill";
 import { put, call } from "redux-saga/effects";
-import { getMatch } from ".";
+import { getMatch, preloader } from ".";
+import { PreloaderEnum } from "../../../../types/preloader";
 
 import { SagasContext } from "../../config/sagas-context";
 import {
@@ -20,20 +21,24 @@ class GeneralSaga {
   @Saga(getheroes)
   public *getheroes(payload: Payload<typeof getheroes>, { api }: SagasContext) {
     try {
+      yield put(preloader.show(PreloaderEnum.GetHeroes));
       const response: object[] = yield call(api.general.getHeroes);
       yield put(getheroes.submit(response));
       // yield put(getAllEl.submit(response));
     } catch (error) {
     } finally {
+      yield put(preloader.hide());
     }
   }
   @Saga(search)
   public *search(payload: Payload<typeof search>, { api }: SagasContext) {
     try {
+      yield put(preloader.show(PreloaderEnum.SearchResult));
       const response: object[] = yield call(api.general.search, payload);
       yield put(search.submit(response));
     } catch (error) {
     } finally {
+      yield put(preloader.hide());
     }
   }
 
@@ -43,10 +48,12 @@ class GeneralSaga {
     { api }: SagasContext
   ) {
     try {
+      // yield put(preloader.show(PreloaderEnum.Profile));
       const response: object = yield call(api.general.getProfile, payload);
       yield put(getProfile.submit(response));
     } catch (error) {
     } finally {
+      // yield put(preloader.hide());
     }
   }
   @Saga(getProfileRecentMatches)
@@ -55,6 +62,7 @@ class GeneralSaga {
     { api }: SagasContext
   ) {
     try {
+      yield put(preloader.show(PreloaderEnum.Profile));
       const response: object[] = yield call(
         api.general.getProfileRecentMatch,
         payload
@@ -63,16 +71,19 @@ class GeneralSaga {
     } catch (error) {
       console.log(error);
     } finally {
+      yield put(preloader.hide());
     }
   }
 
   @Saga(getMatch)
   public *getMatch(payload: Payload<typeof getMatch>, { api }: SagasContext) {
     try {
+      yield put(preloader.show(PreloaderEnum.MatchDetail));
       const response: object = yield call(api.general.getMatch, payload);
       yield put(getMatch.submit(response));
     } catch (error) {
     } finally {
+      yield put(preloader.hide());
     }
   }
 
