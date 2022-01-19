@@ -52,7 +52,7 @@ const Search = () => {
 
   return (
     <div className={classes.search}>
-      <h2>Search</h2>
+      <h2>Search players</h2>
       <Formik
         initialValues={initialValues}
         validationSchema={searchShema}

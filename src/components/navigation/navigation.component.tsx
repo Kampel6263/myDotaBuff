@@ -23,12 +23,12 @@ const Navigation: React.FC = () => {
       >
         Search
       </NavLink>
-      <NavLink
+      {/* <NavLink
         className={({ isActive }) => (isActive ? classes.active : "")}
         to="/preloaders/"
       >
         Preloaders
-      </NavLink>
+      </NavLink> */}
     </div>
   );
 };
