@@ -1,0 +1,11 @@
+@import "../../../../styles/media.scss";
+.matches {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 10px;
+
+  @include tablet() {
+    row-gap: 20px;
+  }
+}

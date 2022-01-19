@@ -55,19 +55,21 @@ const MatchItem: React.FC<MatchItemProps> = ({ matchDetails, maxDuration }) => {
           }
           alt=""
         />
-        <div
-          className={
-            matchDetails.win
-              ? classNames(classes.heroName, classes.win)
-              : classes.heroName
-          }
-        >
-          {
-            heroes.filter((itm) => itm.id === matchDetails.hero_id)[0]
-              ?.localized_name
-          }
+        <div className={classes.secondBlock}>
+          <div
+            className={
+              matchDetails.win
+                ? classNames(classes.heroName, classes.win)
+                : classes.heroName
+            }
+          >
+            {
+              heroes.filter((itm) => itm.id === matchDetails.hero_id)[0]
+                ?.localized_name
+            }
+          </div>
+          <div>Normal skill</div>
         </div>
-        <div>Normal skill</div>
       </div>
 
       <div>

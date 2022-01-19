@@ -10,6 +10,8 @@ class GeneralService {
    */
   public constructor(private http: HttpService) {}
 
+  baseUrl = "https://api.opendota.com/api";
+
   /**
    * Request
    */
@@ -20,45 +22,41 @@ class GeneralService {
     });
 
   public getHeroes = () => {
-    return axios.get(`https://api.opendota.com/api/heroes`).then((res) => {
+    return axios.get(`${this.baseUrl}/heroes`).then((res) => {
       const persons: any = res.data;
       return persons;
     });
   };
 
   public search = (text: string) => {
-    return axios
-      .get(`https://api.opendota.com/api/search?q=${text}`)
-      .then((res) => {
-        return res.data;
-      });
+    return axios.get(`${this.baseUrl}/search?q=${text}`).then((res) => {
+      return res.data;
+    });
   };
 
   public getProfile = async (id: number) => {
     return {
-      profile: await axios
-        .get(`https://api.opendota.com/api/players/${id}`)
-        .then((res) => {
-          return res.data;
-        }),
+      profile: await axios.get(`${this.baseUrl}/players/${id}`).then((res) => {
+        return res.data;
+      }),
       winRate: await axios
-        .get(`https://api.opendota.com/api/players/${id}/wl`)
+        .get(`${this.baseUrl}/players/${id}/wl`)
         .then((res) => {
           return res.data;
         }),
     };
   };
 
-  public getProfileRecentMatch = async (id: number) => {
+  public getProfileRecentMatch = async (id: number, count: number) => {
     const matches = await axios
-      .get(`https://api.opendota.com/api/players/${id}/matches?limit=15`)
+      .get(`${this.baseUrl}/players/${id}/matches?limit=${count}`)
       .then((res) => {
         const data: ProfileRecentMatches[] = res.data;
         return data;
       });
 
     const winMatches = await axios
-      .get(`https://api.opendota.com/api/players/${id}/matches?limit=15&win=1`)
+      .get(`${this.baseUrl}/players/${id}/matches?limit=${count}&win=1`)
       .then((res) => {
         const data: ProfileRecentMatches[] = res.data;
         return data;
@@ -75,11 +73,15 @@ class GeneralService {
     });
   };
   public getMatch = (id: string) => {
+    return axios.get(`${this.baseUrl}/matches/${id}`).then((res) => {
+      return res.data;
+    });
+  };
+
+  public getPlayerHeroes = (id: string, limit: number) => {
     return axios
-      .get(`https://api.opendota.com/api/matches/${id}`)
-      .then((res) => {
-        return res.data;
-      });
+      .get(`${this.baseUrl}/players/${id}/heroes`)
+      .then((res) => res.data);
   };
 
   //   public fetchEl = (id) => {

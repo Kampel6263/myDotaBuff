@@ -25,7 +25,6 @@ const Match = () => {
       state.general
   );
 
-  console.log(matchDetails, "det");
   const dataF = [
     "Hero",
     "Player",
@@ -41,7 +40,6 @@ const Match = () => {
   ];
   useEffect(() => {
     if (id) {
-      console.log(id);
       dispatch(getMatch(id));
     }
   }, []);

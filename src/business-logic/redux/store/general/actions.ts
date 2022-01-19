@@ -13,8 +13,8 @@ const getProfile = make("[general] get profile")
   .stage((payload: number) => payload)
   .stage("submit", (payload: object) => payload);
 
-const getProfileRecentMatches = make("[general] get recent matches")
-  .stage((payload: number) => payload)
+const getProfileMatches = make("[general] get recent matches")
+  .stage((payload: { id: number; count: number }) => payload)
   .stage("submit", (payload: object[]) => payload);
 
 const getMatch = make("[general get match details]")
@@ -25,11 +25,16 @@ const preloader = make("[general] show preloader")
   .stage("show", (payload: number) => payload)
   .stage("hide");
 
+const getPlayerHeroes = make("[general] get player heroes")
+  .stage((payload: { id: string; limit: number }) => payload)
+  .stage("submit", (payload: object[]) => payload);
+
 export {
   getheroes,
   search,
   getProfile,
-  getProfileRecentMatches,
+  getProfileMatches,
   getMatch,
   preloader,
+  getPlayerHeroes,
 };

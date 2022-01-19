@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./preloader.module.scss";
-import PreloaderAnimation from "../../assets/animation/preloader.svg";
+import PreloaderAnimation from "../../assets/animation/preloader2.svg";
 
 const Preloader = () => {
   return (

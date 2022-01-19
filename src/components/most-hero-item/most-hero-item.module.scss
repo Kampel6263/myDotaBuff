@@ -1,0 +1,14 @@
+.hero {
+  display: grid;
+  grid-template-columns: 80px repeat(4, 1fr);
+  column-gap: 40px;
+  padding: 10px;
+  transition: 0.1s;
+  align-items: center;
+  &:nth-child(2n) {
+    background: #292929;
+  }
+  &:not(:first-child):hover {
+    background: #303030;
+  }
+}

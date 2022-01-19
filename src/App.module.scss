@@ -1,9 +1,16 @@
+@import "./styles/media.scss";
 .app {
   max-width: 100%;
   overflow-x: hidden;
   .container {
-    max-width: 1200px;
+    width: 90%;
     margin: 0 auto;
     padding-bottom: 120px;
+    @include tablet() {
+      max-width: 768px;
+    }
+    @include desktop {
+      max-width: 1200px;
+    }
   }
 }

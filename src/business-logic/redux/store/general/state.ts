@@ -12,6 +12,7 @@ class GeneralState {
   public profileRecentMatches: object[] = [];
   public matchDetails: object = {};
   public showPreloader: number | null = null;
+  public playerHeroes: object[] = [{}];
 }
 
 export { GeneralState };

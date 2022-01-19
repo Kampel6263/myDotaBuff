@@ -14,9 +14,15 @@ import Navigation from "./components/navigation/navigation.component";
 import Search from "./pages/search/search.component";
 import Profile from "./pages/search/pages/profile.component";
 import Match from "./pages/match/match.component";
+import Preloader from "./components/preloader/preloader.coponent";
 // import Profile from "./pages/search/pages/";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
+import PreloaderAnimation1 from "./assets/animation/Blocks.svg";
+import PreloaderAnimation2 from "./assets/animation/preloader.svg";
+import PreloaderAnimation3 from "./assets/animation/preloader2.svg";
+import PreloaderAnimation4 from "./assets/animation/preloader3.svg";
+import PreloaderAnimation5 from "./assets/animation/preloader4.svg";
 const App = () => {
   return (
     <div className={classes.app}>
@@ -35,6 +41,30 @@ const App = () => {
             element={<Navigate replace to="/search" />}
           />
           <Route path="/match/:id" element={<Match />} />
+          <Route
+            path="/preloaders"
+            element={
+              <div>
+                <div>Preloaders</div>
+
+                <object type="image/svg+xml" data={PreloaderAnimation1}>
+                  svg-animation
+                </object>
+                <object type="image/svg+xml" data={PreloaderAnimation2}>
+                  svg-animation
+                </object>
+                <object type="image/svg+xml" data={PreloaderAnimation3}>
+                  svg-animation
+                </object>
+                <object type="image/svg+xml" data={PreloaderAnimation4}>
+                  svg-animation
+                </object>
+                <object type="image/svg+xml" data={PreloaderAnimation5}>
+                  svg-animation
+                </object>
+              </div>
+            }
+          />
         </Routes>
         {/* </BrowserRouter> */}
       </div>

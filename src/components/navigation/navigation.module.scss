@@ -1,12 +1,20 @@
+@import "../../styles/media.scss";
+
 .navigation {
   a {
     display: inline-block;
-    padding: 30px 60px;
+    padding: 10px 30px;
 
     background: rgb(122, 122, 122);
     margin: 0 2px;
     text-decoration: none;
     color: #000;
+    @include tablet() {
+      padding: 20px 40px;
+    }
+    @include desktop() {
+      padding: 30px 60px;
+    }
     &.active {
       background: rgb(197, 197, 197);
       font-weight: 500;

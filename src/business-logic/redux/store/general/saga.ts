@@ -1,15 +1,10 @@
 import { Payload, Saga } from "redux-chill";
 import { put, call } from "redux-saga/effects";
-import { getMatch, preloader } from ".";
+import { getMatch, getPlayerHeroes, preloader } from ".";
 import { PreloaderEnum } from "../../../../types/preloader";
 
 import { SagasContext } from "../../config/sagas-context";
-import {
-  getheroes,
-  getProfile,
-  search,
-  getProfileRecentMatches,
-} from "./actions";
+import { getheroes, getProfile, search, getProfileMatches } from "./actions";
 /**
  * general saga
  */
@@ -48,26 +43,27 @@ class GeneralSaga {
     { api }: SagasContext
   ) {
     try {
-      // yield put(preloader.show(PreloaderEnum.Profile));
+      yield put(preloader.show(PreloaderEnum.Profile));
       const response: object = yield call(api.general.getProfile, payload);
       yield put(getProfile.submit(response));
     } catch (error) {
     } finally {
-      // yield put(preloader.hide());
+      yield put(preloader.hide());
     }
   }
-  @Saga(getProfileRecentMatches)
-  public *getProfileRecentMatches(
-    payload: Payload<typeof getProfileRecentMatches>,
+  @Saga(getProfileMatches)
+  public *getProfileMatches(
+    payload: Payload<typeof getProfileMatches>,
     { api }: SagasContext
   ) {
     try {
       yield put(preloader.show(PreloaderEnum.Profile));
       const response: object[] = yield call(
         api.general.getProfileRecentMatch,
-        payload
+        payload.id,
+        payload.count
       );
-      yield put(getProfileRecentMatches.submit(response));
+      yield put(getProfileMatches.submit(response));
     } catch (error) {
       console.log(error);
     } finally {
@@ -84,6 +80,25 @@ class GeneralSaga {
     } catch (error) {
     } finally {
       yield put(preloader.hide());
+    }
+  }
+
+  @Saga(getPlayerHeroes)
+  public *getPlayerHeroes(
+    payload: Payload<typeof getPlayerHeroes>,
+    { api }: SagasContext
+  ) {
+    try {
+      yield put(preloader.show(PreloaderEnum.Profile));
+      const response: object[] = yield call(
+        api.general.getPlayerHeroes,
+        payload.id,
+        payload.limit
+      );
+      yield put(getPlayerHeroes.submit(response));
+    } catch (error) {
+    } finally {
+      yield put(preloader.hide(PreloaderEnum.Profile));
     }
   }
 

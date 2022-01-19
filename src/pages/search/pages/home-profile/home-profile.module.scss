@@ -1,18 +1,77 @@
+@import "../../../../styles/media.scss";
 .matches {
-  margin-top: 50px;
+  margin-top: 10px;
   display: grid;
   grid-template-columns: 1fr;
-  row-gap: 20px;
+  row-gap: 10px;
+
+  @include tablet() {
+    row-gap: 20px;
+  }
 }
 
 .header {
   margin-top: 20px;
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 140px 1fr;
   grid-template-rows: auto;
   align-items: center;
+  justify-content: flex-start;
+  column-gap: 10px;
   row-gap: 5px;
+  font-size: 12px;
+  @include tablet() {
+    grid-template-columns: 200px 1fr;
+    font-size: 16px;
+  }
   img {
     grid-row: 6 span;
+  }
+}
+
+.title {
+  margin-top: 35px;
+  margin-bottom: 15px;
+  font-size: 25px;
+}
+
+.playerHeroes {
+  display: grid;
+  grid-template-columns: 1fr;
+  // row-gap: 10px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 80px repeat(4, 1fr);
+  column-gap: 40px;
+  padding: 10px;
+  transition: 0.1s;
+  align-items: center;
+}
+
+.notFound {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  img {
+    width: 250px;
+  }
+  div {
+    margin-top: 10px;
+  }
+}
+
+.showMore {
+  margin-top: 15px;
+  display: inline-block;
+  box-shadow: 0px 0px 45px 0px rgba(255, 255, 255, 0.13);
+  padding: 5px 15px;
+  transition: 0.1s;
+  cursor: pointer;
+  &:hover {
+    background: rgb(30, 30, 30);
   }
 }
