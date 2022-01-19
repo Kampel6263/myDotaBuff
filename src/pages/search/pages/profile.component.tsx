@@ -13,17 +13,24 @@ const Profile = () => {
   return (
     <div>
       <div className={classes.profileNavigation}>
-        <NavLink className={({ isActive }) => (isActive ? "" : "")} to={``}>
+        <NavLink
+          className={({ isActive }) => {
+            return location.pathname.split("/").length === 3 && isActive
+              ? classes.active
+              : "";
+          }}
+          to={``}
+        >
           Profile
         </NavLink>
         <NavLink
-          className={({ isActive }) => (isActive ? "" : "")}
+          className={({ isActive }) => (isActive ? classes.active : "")}
           to={`heroes`}
         >
           Heroes
         </NavLink>
         <NavLink
-          className={({ isActive }) => (isActive ? "" : "")}
+          className={({ isActive }) => (isActive ? classes.active : "")}
           to={`matches`}
         >
           Matches

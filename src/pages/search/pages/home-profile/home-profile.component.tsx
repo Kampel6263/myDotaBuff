@@ -88,7 +88,7 @@ const HomeProfile: React.FC<HomeProfileProps> = ({ id }) => {
     playerHeroes,
   } = UseHomeProfileData();
 
-  console.log(playerHeroes, "player heroes");
+  // console.log(playerHeroes, "player heroes");
   useEffect(() => {
     if (id) {
       dispatch(getProfileMatches({ id: Number(id), count: 5 }));
@@ -101,7 +101,7 @@ const HomeProfile: React.FC<HomeProfileProps> = ({ id }) => {
     (profile.winRate?.win / (profile.winRate?.win + profile.winRate?.lose)) *
       100
   ).slice(0, 5);
-  console.log(playerHeroes);
+  // console.log(playerHeroes);
   if (showPreloader === PreloaderEnum.Profile || !profile?.profile) {
     return <Preloader />;
   }

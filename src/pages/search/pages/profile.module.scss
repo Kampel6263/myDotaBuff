@@ -1,11 +1,28 @@
+@import "../../../styles/media.scss";
+
 .profileNavigation {
-  margin-top: 25px;
+  margin-top: 10px;
+  @include tablet() {
+    margin-top: 25px;
+  }
   a {
     display: inline-block;
     color: #000;
-    padding: 10px 20px;
+    padding: 5px 10px;
     background: #7a7a7a;
     text-decoration: none;
     margin-right: 3px;
+    font-size: 13px;
+    @include tablet() {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    &:hover {
+      background: rgb(140, 140, 140);
+    }
+    &.active {
+      background: rgb(197, 197, 197);
+      font-weight: 500;
+    }
   }
 }

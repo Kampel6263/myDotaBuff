@@ -12,7 +12,7 @@ const Heroes: React.FC<{ id: string }> = ({ id }) => {
   useEffect(() => {
     dispatch(getPlayerHeroes({ id: id, limit: 0 }));
   }, []);
-  console.log(!!playerHeroes[0].games, "!!!");
+  //   console.log(!!playerHeroes[0].games, "!!!");
   if (playerHeroes.length === 0 || !playerHeroes[0].games) {
     return <Preloader />;
   }

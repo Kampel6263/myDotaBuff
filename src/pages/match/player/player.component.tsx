@@ -13,7 +13,6 @@ type PlayerProps = {
 };
 
 const Player: React.FC<PlayerProps> = ({ el, columsName, index }) => {
-  const { obj } = getMatchData();
   const { heroesImg, heroes } = useHeroesData();
   const navigate = useNavigate();
   if (columsName) {
@@ -50,7 +49,11 @@ const Player: React.FC<PlayerProps> = ({ el, columsName, index }) => {
         }}
         className={el.account_id ? classes.activeId : ""}
       >
-        {el.personaname ? el.personaname : "Anonymous"}
+        {el.personaname
+          ? el.personaname.length > 8
+            ? el.personaname.slice(0, 7) + "..."
+            : el.personaname
+          : "Anonymous"}
       </div>
       <div>{el.kills}</div>
       <div>{el.deaths}</div>

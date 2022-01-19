@@ -38,16 +38,24 @@
 .playerHeroes {
   display: grid;
   grid-template-columns: 1fr;
+  font-size: 12px;
+  @include tablet() {
+    font-size: 16px;
+  }
   // row-gap: 10px;
 }
 
 .hero {
   display: grid;
-  grid-template-columns: 80px repeat(4, 1fr);
-  column-gap: 40px;
+  grid-template-columns: 40px repeat(4, 1fr);
+  column-gap: 10px;
   padding: 10px;
   transition: 0.1s;
   align-items: center;
+  @include tablet() {
+    grid-template-columns: 80px repeat(4, 1fr);
+    column-gap: 40px;
+  }
 }
 
 .notFound {
