@@ -31,7 +31,7 @@ const Profile = () => {
       </div>
       <Routes>
         <Route path="/" element={<HomeProfile id={id} />} />
-        <Route path="/heroes" element={<Heroes />} />
+        <Route path="/heroes" element={<Heroes id={id} />} />
         <Route path="/matches" element={<Matches id={id} />} />
       </Routes>
     </div>
