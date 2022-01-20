@@ -14,25 +14,40 @@
   margin-top: 20px;
   display: grid;
   grid-template-columns: 140px 1fr;
-  grid-template-rows: auto;
+  grid-template-rows: repeat(7, auto);
   align-items: center;
   justify-content: flex-start;
   column-gap: 10px;
   row-gap: 5px;
   font-size: 12px;
   @include tablet() {
-    grid-template-columns: 200px 1fr;
+    grid-auto-flow: column;
+    grid-template-columns: 200px 1fr auto;
     font-size: 16px;
   }
   img {
-    grid-row: 6 span;
+    grid-row: 7 span;
+  }
+  .calendar {
+    grid-row: 7 span;
+    grid-column: 2 span;
+    @include tablet() {
+      grid-column: 1 span;
+    }
+  }
+  div {
+    color: rgb(240, 255, 246);
+    span {
+      font-size: 12px;
+      opacity: 0.8;
+      color: #fff;
+    }
   }
 }
 
 .title {
   margin-top: 35px;
   margin-bottom: 15px;
-  font-size: 25px;
 }
 
 .playerHeroes {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getProfileMatches } from "../../../../business-logic/redux/store";
 import MatchItem from "../../../../components/match-item/match-item.component";
@@ -13,13 +13,14 @@ const Matches: React.FC<{ id: string }> = ({ id }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (id) {
-      //   dispatch(getProfile(Number(id)));
+    if (id && profileRecentMatches.length === 0) {
       dispatch(getProfileMatches({ id: Number(id), count: 100 }));
-      //   dispatch(getPlayerHeroes({ id: id, limit: 10 }));
     }
   }, [id]);
-  if (showPreloader === PreloaderEnum.Profile) {
+  if (
+    showPreloader === PreloaderEnum.Profile ||
+    profileRecentMatches.length === 0
+  ) {
     return <Preloader />;
   }
   return (

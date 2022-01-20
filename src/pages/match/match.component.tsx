@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import { State } from "../../business-logic/redux/config";
 import { getMatch } from "../../business-logic/redux/store/general";
 import Preloader from "../../components/preloader/preloader.coponent";
+import Title from "../../components/title/title.component";
 import { PreloaderEnum } from "../../types/preloader";
 import { useHeroesData } from "../heroes/heroes.hook";
 import { matchDetail } from "./match.hook";
@@ -65,7 +66,7 @@ const Match = () => {
         <div className={classes.direScore}> {matchDetails.dire_score}</div>
       </div>
 
-      <div className={classes.playerInfoTitle}>The radiant</div>
+      <Title className={classes.playerInfoTitle}>The radiant</Title>
       <div className={classes.playersInfo}>
         <Player columsName={dataF} />
         {matchDetails.players
@@ -74,7 +75,7 @@ const Match = () => {
             <Player el={el} index={i} key={i} />
           ))}
       </div>
-      <div className={classes.playerInfoTitle}>The dire</div>
+      <Title className={classes.playerInfoTitle}>The dire</Title>
       <div className={classes.playersInfo}>
         <Player columsName={dataF} />
         {matchDetails.players

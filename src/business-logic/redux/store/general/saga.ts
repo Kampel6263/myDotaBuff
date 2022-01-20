@@ -12,7 +12,6 @@ class GeneralSaga {
   /**
    * App init
    */
-
   @Saga(getheroes)
   public *getheroes(payload: Payload<typeof getheroes>, { api }: SagasContext) {
     try {

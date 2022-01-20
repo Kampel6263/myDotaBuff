@@ -17,6 +17,8 @@ import Preloader from "../../../../components/preloader/preloader.coponent";
 import { PreloaderEnum } from "../../../../types/preloader";
 import { NavLink, useNavigate } from "react-router-dom";
 import MostHeroItem from "../../../../components/most-hero-item/most-hero-item.component";
+import Title from "../../../../components/title/title.component";
+import ActivitiCalendar from "../../../../components/activiti-calendar/activiti-calendar.component";
 
 export type ProfileProps = {
   account_id: number;
@@ -91,7 +93,10 @@ const HomeProfile: React.FC<HomeProfileProps> = ({ id }) => {
   // console.log(playerHeroes, "player heroes");
   useEffect(() => {
     if (id) {
-      dispatch(getProfileMatches({ id: Number(id), count: 5 }));
+      if (profileRecentMatches.length === 0) {
+        dispatch(getProfileMatches({ id: Number(id), count: 100 }));
+      }
+
       dispatch(getProfile(Number(id)));
       dispatch(getPlayerHeroes({ id: id, limit: 10 }));
     }
@@ -111,11 +116,24 @@ const HomeProfile: React.FC<HomeProfileProps> = ({ id }) => {
         <div>
           <div className={classes.header}>
             <img src={profile?.profile.profile?.avatarfull} alt="" />
-            <div>ID: {profile.profile.profile.account_id}</div>
-            <div>Nick name: {profile?.profile.profile?.personaname} </div>
-            <div>MMR: {profile?.profile.mmr_estimate?.estimate} </div>
-            <div>Win: {profile?.winRate.win}</div>
-            <div>Lose: {profile?.winRate.lose}</div>
+            <div>
+              <span>ID:</span> {profile.profile.profile.account_id}
+            </div>
+            <div>
+              <span>Nick name:</span> {profile?.profile.profile?.personaname}{" "}
+            </div>
+            <div>
+              <span>MMR:</span> {profile?.profile.mmr_estimate?.estimate}{" "}
+            </div>
+            <div>
+              <span>Matches:</span> {profile.winRate.win + profile.winRate.lose}
+            </div>
+            <div>
+              <span>Win:</span> {profile?.winRate.win}
+            </div>
+            <div>
+              <span>Lose:</span> {profile?.winRate.lose}
+            </div>
 
             <div
               style={{
@@ -128,10 +146,14 @@ const HomeProfile: React.FC<HomeProfileProps> = ({ id }) => {
                 }, 0 )`,
               }}
             >
-              Win rate: {winRate}%
+              <span>Win rate:</span> {winRate}%
+            </div>
+            <div className={classes.calendar}>
+              <ActivitiCalendar />
             </div>
           </div>
-          <div className={classes.title}>Most played heroes</div>
+          <Title className={classes.title}>Most played heroes</Title>
+
           <div className={classes.playerHeroes}>
             <div className={classes.hero}>
               <div>Hero</div>
@@ -150,7 +172,7 @@ const HomeProfile: React.FC<HomeProfileProps> = ({ id }) => {
           >
             Show more
           </div>
-          <div className={classes.title}>Recent matches</div>
+          <Title className={classes.title}>Recent matches</Title>
           <div className={classes.matches}>
             {profileRecentMatches ? (
               profileRecentMatches
