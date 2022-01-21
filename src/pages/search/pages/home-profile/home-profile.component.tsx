@@ -93,9 +93,7 @@ const HomeProfile: React.FC<HomeProfileProps> = ({ id }) => {
   // console.log(playerHeroes, "player heroes");
   useEffect(() => {
     if (id) {
-      if (profileRecentMatches.length === 0) {
-        dispatch(getProfileMatches({ id: Number(id), count: 100 }));
-      }
+      dispatch(getProfileMatches({ id: Number(id), count: 100 }));
 
       dispatch(getProfile(Number(id)));
       dispatch(getPlayerHeroes({ id: id, limit: 10 }));
@@ -162,7 +160,7 @@ const HomeProfile: React.FC<HomeProfileProps> = ({ id }) => {
               <div>Lose</div>
               <div>Win rate</div>
             </div>
-            {playerHeroes.slice(0, 5).map((el, i) => (
+            {playerHeroes.slice(0, 7).map((el, i) => (
               <MostHeroItem el={el} key={i} />
             ))}
           </div>
@@ -176,7 +174,7 @@ const HomeProfile: React.FC<HomeProfileProps> = ({ id }) => {
           <div className={classes.matches}>
             {profileRecentMatches ? (
               profileRecentMatches
-                .slice(0, 5)
+                .slice(0, 7)
                 .map((el, i) => (
                   <MatchItem
                     matchDetails={el}

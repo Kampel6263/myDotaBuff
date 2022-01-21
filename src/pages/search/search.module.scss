@@ -81,3 +81,17 @@ button {
   transform: translateY(8px);
   height: 0;
 }
+
+.author {
+  padding: 10px 15px;
+  color: rgba($color: #fff, $alpha: 0.5);
+  border-radius: 4px;
+  font-size: 13px;
+  background: #3d3d3d;
+  text-decoration: none;
+  margin-left: 20px;
+  transition: 0.1s;
+  &:hover {
+    color: rgba($color: #fff, $alpha: 1);
+  }
+}

@@ -80,7 +80,7 @@ const useHeroesData = () => {
         case "Nature's Prophet":
           pushImg(el.id, "furion");
           break;
-        case "Outworld Destroyer":
+        case "Outworld Devourer":
           pushImg(el.id, "obsidian_destroyer");
           break;
         case "Keeper of the Light":

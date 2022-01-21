@@ -9,3 +9,12 @@
     row-gap: 20px;
   }
 }
+
+.title {
+  display: flex;
+  div {
+    &:not(:first-child) {
+      margin-left: 30px;
+    }
+  }
+}

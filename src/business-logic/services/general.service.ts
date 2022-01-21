@@ -22,7 +22,7 @@ class GeneralService {
     });
 
   public getHeroes = () => {
-    return axios.get(`${this.baseUrl}/heroes`).then((res) => {
+    return axios.get(`${this.baseUrl}/heroStats`).then((res) => {
       const persons: any = res.data;
       return persons;
     });

@@ -38,6 +38,11 @@ const MatchItem: React.FC<MatchItemProps> = ({ matchDetails, maxDuration }) => {
   );
 
   const hours = Math.floor(matchDetails.duration / 3600);
+  const kdaSum =
+    matchDetails.kills + matchDetails.deaths + matchDetails.assists;
+  const kda =
+    (matchDetails.kills + matchDetails.assists) /
+    (matchDetails.deaths !== 0 ? matchDetails.deaths : 1);
 
   return (
     <div
@@ -90,21 +95,46 @@ const MatchItem: React.FC<MatchItemProps> = ({ matchDetails, maxDuration }) => {
           )}
         </div>
       </div>
-      <div>
+      {/* <div>
         <div>Ranked</div>
         <div>All Pick</div>
-      </div>
+      </div> */}
       <div>
         {hours !== 0 && "0" + hours + ":"}
         {String(dayjs.unix(matchDetails.duration).format("mm:ss"))}
         <div
           style={{ width: `${(matchDetails.duration / maxDuration) * 100}%` }}
-          className={classes.whitmatchDetailsine}
+          className={classes.whiteLine}
         ></div>
       </div>
 
-      <div>
-        {matchDetails.kills}/{matchDetails.deaths}/{matchDetails.assists}
+      <div className={classes.kda}>
+        <span>{matchDetails.kills}</span>/<span>{matchDetails.deaths}</span>/
+        <span>{matchDetails.assists}</span>
+        <div className={classes.lines}>
+          {" "}
+          <div
+            style={{
+              width: `${(matchDetails.kills / kdaSum) * 100}%`,
+            }}
+          ></div>
+          <div
+            style={{
+              width: `${(matchDetails.deaths / kdaSum) * 100}%`,
+            }}
+          ></div>
+          <div
+            style={{
+              width: `${(matchDetails.assists / kdaSum) * 100}%`,
+            }}
+          ></div>
+        </div>
+      </div>
+      <div
+        className={classes.lstKda}
+        style={{ color: `rgb(${(1 - kda / 8) * 255}, ${(kda / 8) * 255}, 0` }}
+      >
+        KDA: {String(kda).slice(0, 4)}
       </div>
     </div>
   );

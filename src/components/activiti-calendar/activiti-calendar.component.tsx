@@ -6,7 +6,7 @@ import classes from "./activiti-calendar.module.scss";
 
 const ActivitiCalendar = () => {
   const { profileRecentMatches } = UseHomeProfileData();
-  const daysCount = 98;
+  const daysCount = 91;
   const [arrForCalendar, setArrForCalendar] = useState<
     { games: number; wins: number; date: string }[]
   >([]);
@@ -87,7 +87,7 @@ const ActivitiCalendar = () => {
           <div className={classes.detail}>
             <div>{el.date}</div>
             <div>
-              Record: <span className={classes.win}>{el.wins}</span>-
+              Record: <span className={classes.win}>{el.wins}</span> -{" "}
               <span className={classes.lose}>{el.games - el.wins}</span>
             </div>
           </div>

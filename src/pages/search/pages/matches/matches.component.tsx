@@ -23,9 +23,27 @@ const Matches: React.FC<{ id: string }> = ({ id }) => {
   ) {
     return <Preloader />;
   }
+
+  const win = profileRecentMatches.filter((el) => el.win).length;
+
   return (
     <div className={classes.matches}>
-      Matches({profileRecentMatches.length})
+      <div className={classes.title}>
+        <div>Matches: {profileRecentMatches.length}</div>
+        <div>Win: {win}</div>
+        <div>Lose: {profileRecentMatches.length - win}</div>
+        <div
+          style={{
+            color: `rgb(${255 * (1 - win / profileRecentMatches.length)}, ${
+              (win / profileRecentMatches.length) * 255
+            }, 0)`,
+          }}
+        >
+          Win rate:
+          {String((win / profileRecentMatches.length) * 100).slice(0, 4)}%
+        </div>
+      </div>
+
       {profileRecentMatches ? (
         profileRecentMatches.map((el, i) => (
           <MatchItem matchDetails={el} maxDuration={maxDuration} key={i} />

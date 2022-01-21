@@ -14,13 +14,11 @@ export type HeroeProps = {
   primary_attr: "int" | "str" | "agi";
   roles: string[];
   img: string;
+  icon: string;
 };
 
 const Heroes: React.FC = () => {
-  // const [heroes, setHeroes] = useState<HeroeProps[]>([])
   const { heroes, showPreloader } = useHeroesData();
-
-  // console.log(heroes, "heroes");
   if (showPreloader === PreloaderEnum.GetHeroes) {
     return <Preloader />;
   }
