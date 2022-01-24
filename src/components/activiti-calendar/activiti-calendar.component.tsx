@@ -12,19 +12,20 @@ const ActivitiCalendar = () => {
   >([]);
   useEffect(() => {
     const arrWithDate: { games: number; wins: number; date: string }[] = [];
-    for (let el = 0; el <= daysCount; el++) {
+    for (let el = 0; el < daysCount; el++) {
       arrWithDate.push({
         date: dayjs.unix(Date.now() / 1000 - el * 24 * 3600).format("DD/MM/YY"),
         games: 0,
         wins: 0,
       });
       if (
-        daysCount - el <= 6 &&
+        daysCount - el <= 7 &&
         dayjs.unix(Date.now() / 1000 - el * 24 * 3600).format("ddd") === "Mon"
       ) {
         el = daysCount + 1;
       }
     }
+
     const arrWithMatchInfo: { games: number; wins: number; date: string }[] =
       arrWithDate
         .map((el) => {
@@ -41,13 +42,14 @@ const ActivitiCalendar = () => {
           return el;
         })
         .reverse();
-
-    for (let i = 1; i <= daysCount + 2 - arrWithMatchInfo.length; i++) {
+    let i = 1;
+    while (arrWithMatchInfo.length !== daysCount) {
       arrWithMatchInfo.push({
         date: dayjs.unix(Date.now() / 1000 + i * 24 * 3600).format("DD/MM/YY"),
         games: 0,
         wins: 0,
       });
+      i++;
     }
     setArrForCalendar(arrWithMatchInfo);
     return () => {
@@ -57,13 +59,13 @@ const ActivitiCalendar = () => {
 
   return (
     <div className={classes.calendar}>
-      <div>Mo</div>
-      <div>Tu</div>
-      <div>We</div>
-      <div>Th</div>
-      <div>Fr</div>
-      <div>Sa</div>
-      <div>Su</div>
+      <div className={classes.dayW}>Mo</div>
+      <div className={classes.dayW}>Tu</div>
+      <div className={classes.dayW}>We</div>
+      <div className={classes.dayW}>Th</div>
+      <div className={classes.dayW}>Fr</div>
+      <div className={classes.dayW}>Sa</div>
+      <div className={classes.dayW}>Su</div>
       {arrForCalendar.map((el, i) => (
         <div
           className={classes.day}

@@ -111,6 +111,13 @@ const MatchItem: React.FC<MatchItemProps> = ({ matchDetails, maxDuration }) => {
       <div className={classes.kda}>
         <span>{matchDetails.kills}</span>/<span>{matchDetails.deaths}</span>/
         <span>{matchDetails.assists}</span>
+        <span
+          className={classes.lstKda}
+          style={{ color: `rgb(${(1 - kda / 8) * 255}, ${(kda / 8) * 255}, 0` }}
+        >
+          {" "}
+          (KDA: {String(kda).slice(0, 4)})
+        </span>
         <div className={classes.lines}>
           {" "}
           <div
@@ -129,12 +136,6 @@ const MatchItem: React.FC<MatchItemProps> = ({ matchDetails, maxDuration }) => {
             }}
           ></div>
         </div>
-      </div>
-      <div
-        className={classes.lstKda}
-        style={{ color: `rgb(${(1 - kda / 8) * 255}, ${(kda / 8) * 255}, 0` }}
-      >
-        KDA: {String(kda).slice(0, 4)}
       </div>
     </div>
   );

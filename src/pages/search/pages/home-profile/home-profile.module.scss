@@ -41,6 +41,10 @@
       font-size: 12px;
       opacity: 0.8;
       color: #fff;
+      &.winRateToday {
+        margin-left: 10px;
+        font-size: 14px;
+      }
     }
   }
 }

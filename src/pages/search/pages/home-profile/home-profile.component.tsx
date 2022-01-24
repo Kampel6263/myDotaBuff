@@ -19,6 +19,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import MostHeroItem from "../../../../components/most-hero-item/most-hero-item.component";
 import Title from "../../../../components/title/title.component";
 import ActivitiCalendar from "../../../../components/activiti-calendar/activiti-calendar.component";
+import dayjs from "dayjs";
+import { date } from "yup";
 
 export type ProfileProps = {
   account_id: number;
@@ -90,7 +92,14 @@ const HomeProfile: React.FC<HomeProfileProps> = ({ id }) => {
     playerHeroes,
   } = UseHomeProfileData();
 
-  // console.log(playerHeroes, "player heroes");
+  const gameToday = profileRecentMatches.filter(
+    (el) =>
+      dayjs.unix(el.start_time).format("DD/MM/YY") ===
+      dayjs.unix(Date.now() / 1000).format("DD/MM/YY")
+  );
+
+  const winGame = gameToday?.filter((el) => el.win).length;
+
   useEffect(() => {
     if (id) {
       dispatch(getProfileMatches({ id: Number(id), count: 100 }));
@@ -100,11 +109,17 @@ const HomeProfile: React.FC<HomeProfileProps> = ({ id }) => {
     }
   }, [id]);
 
-  const winRate = String(
+  const winRate =
     (profile.winRate?.win / (profile.winRate?.win + profile.winRate?.lose)) *
-      100
-  ).slice(0, 5);
-  // console.log(playerHeroes);
+    100;
+
+  const oldWinrate =
+    ((profile.winRate?.win - winGame) /
+      (profile.winRate?.win + profile.winRate?.lose - gameToday.length)) *
+    100;
+
+  console.log(gameToday, oldWinrate);
+  const winRateToday = winRate - oldWinrate;
   if (showPreloader === PreloaderEnum.Profile || !profile?.profile) {
     return <Preloader />;
   }
@@ -144,7 +159,18 @@ const HomeProfile: React.FC<HomeProfileProps> = ({ id }) => {
                 }, 0 )`,
               }}
             >
-              <span>Win rate:</span> {winRate}%
+              <span>Win rate:</span> {String(winRate).slice(0, 5)}%
+              {winRateToday !== 0 && (
+                <span
+                  className={classes.winRateToday}
+                  style={{
+                    color: `${winRateToday > 0 ? "rgb(0,255,0)" : "red"}`,
+                  }}
+                >
+                  {winRateToday > 0 ? "+" : ""}
+                  {String(winRateToday).slice(0, 5)}% today
+                </span>
+              )}
             </div>
             <div className={classes.calendar}>
               <ActivitiCalendar />

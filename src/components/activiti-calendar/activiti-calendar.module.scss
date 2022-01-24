@@ -24,6 +24,12 @@
   height: 20px;
   box-sizing: border-box;
   position: relative;
+  &W {
+    width: 22px;
+    @include tablet() {
+      width: 24px;
+    }
+  }
   @include tablet() {
     border: 2px solid rgb(45, 45, 45);
     width: 22px;

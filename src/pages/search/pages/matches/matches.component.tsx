@@ -39,7 +39,7 @@ const Matches: React.FC<{ id: string }> = ({ id }) => {
             }, 0)`,
           }}
         >
-          Win rate:
+          Win rate:{" "}
           {String((win / profileRecentMatches.length) * 100).slice(0, 4)}%
         </div>
       </div>
