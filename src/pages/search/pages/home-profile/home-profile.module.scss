@@ -10,6 +10,45 @@
   }
 }
 
+.idBlock {
+  position: relative;
+  .rang {
+    position: absolute;
+    max-height: 40px;
+    left: 115px;
+    top: 5px;
+    @include tablet() {
+      left: 150px;
+    }
+    .stars {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      // align-items: flex-start;
+      top: -4px;
+      text-align: center;
+      width: 100%;
+      @include tablet() {
+        top: -6px;
+      }
+      img {
+        height: 5px;
+        display: block;
+        @include tablet() {
+          height: 7px;
+        }
+      }
+    }
+    .rangImg {
+      max-height: 30px;
+      display: block;
+      @include tablet() {
+        max-height: 40px;
+      }
+    }
+  }
+}
+
 .header {
   margin-top: 20px;
   display: grid;
@@ -42,8 +81,12 @@
       opacity: 0.8;
       color: #fff;
       &.winRateToday {
-        margin-left: 10px;
-        font-size: 14px;
+        margin-left: 6px;
+        font-size: 10px;
+        @include tablet() {
+          font-size: 14px;
+          margin-left: 10px;
+        }
       }
     }
   }

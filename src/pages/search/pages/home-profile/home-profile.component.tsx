@@ -21,6 +21,7 @@ import Title from "../../../../components/title/title.component";
 import ActivitiCalendar from "../../../../components/activiti-calendar/activiti-calendar.component";
 import dayjs from "dayjs";
 import { date } from "yup";
+import { transform } from "typescript";
 
 export type ProfileProps = {
   account_id: number;
@@ -92,14 +93,6 @@ const HomeProfile: React.FC<HomeProfileProps> = ({ id }) => {
     playerHeroes,
   } = UseHomeProfileData();
 
-  const gameToday = profileRecentMatches.filter(
-    (el) =>
-      dayjs.unix(el.start_time).format("DD/MM/YY") ===
-      dayjs.unix(Date.now() / 1000).format("DD/MM/YY")
-  );
-
-  const winGame = gameToday?.filter((el) => el.win).length;
-
   useEffect(() => {
     if (id) {
       dispatch(getProfileMatches({ id: Number(id), count: 100 }));
@@ -108,6 +101,31 @@ const HomeProfile: React.FC<HomeProfileProps> = ({ id }) => {
       dispatch(getPlayerHeroes({ id: id, limit: 10 }));
     }
   }, [id]);
+
+  if (showPreloader === PreloaderEnum.Profile || !profile?.profile) {
+    return <Preloader />;
+  }
+
+  const gameToday = profileRecentMatches.filter(
+    (el) =>
+      dayjs.unix(el.start_time).format("DD/MM/YY") ===
+      dayjs.unix(Date.now() / 1000).format("DD/MM/YY")
+  );
+
+  const winGame = gameToday?.filter((el) => el.win).length;
+  const rangImg = profile?.profile?.rank_tier
+    ? "r" + String(profile?.profile?.rank_tier).split("")[0]
+    : false;
+
+  const arrWithStars: { img: string; mt: number }[] = [];
+  const starCount = Number(String(profile.profile.rank_tier).split("")[1]);
+  for (let i = 0; i < starCount; i++) {
+    arrWithStars.push({
+      img: "star",
+      mt:
+        starCount % 2 !== 0 ? Math.sqrt(Math.floor(starCount / 2 - i) ** 2) : 0,
+    });
+  }
 
   const winRate =
     (profile.winRate?.win / (profile.winRate?.win + profile.winRate?.lose)) *
@@ -118,19 +136,35 @@ const HomeProfile: React.FC<HomeProfileProps> = ({ id }) => {
       (profile.winRate?.win + profile.winRate?.lose - gameToday.length)) *
     100;
 
-  console.log(gameToday, oldWinrate);
   const winRateToday = winRate - oldWinrate;
-  if (showPreloader === PreloaderEnum.Profile || !profile?.profile) {
-    return <Preloader />;
-  }
+
   return (
     <div>
       {profile?.profile?.profile?.account_id ? (
         <div>
           <div className={classes.header}>
             <img src={profile?.profile.profile?.avatarfull} alt="" />
-            <div>
-              <span>ID:</span> {profile.profile.profile.account_id}
+            <div className={classes.idBlock}>
+              <span>ID:</span> {profile.profile.profile.account_id}{" "}
+              <div className={classes.rang}>
+                <div className={classes.stars}>
+                  {arrWithStars.map((el, i) => (
+                    <img
+                      key={i}
+                      style={{
+                        marginTop: `${el.mt}px`,
+                        transform: `scale(${1.1 - el.mt / 10})`,
+                      }}
+                      className={classes.star}
+                      src={require(`/src/assets/img/${el.img}.png`)}
+                    />
+                  ))}
+                </div>
+                <img
+                  className={classes.rangImg}
+                  src={require(`/src/assets/img/${rangImg}.png`)}
+                />
+              </div>
             </div>
             <div>
               <span>Nick name:</span> {profile?.profile.profile?.personaname}{" "}
