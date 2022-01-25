@@ -1,9 +1,11 @@
 @import "../../styles/media.scss";
-
-div {
-  max-width: 100%;
-  overflow: hidden;
+.search {
+  div {
+    max-width: 100%;
+    overflow: hidden;
+  }
 }
+
 .result {
   display: grid;
   margin-top: 70px;
