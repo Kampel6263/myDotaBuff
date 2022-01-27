@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/myDotaBuff/static/css/main.81226087.css",
-    "main.js": "/myDotaBuff/static/js/main.1ec70f11.js",
+    "main.css": "/myDotaBuff/static/css/main.99be116c.css",
+    "main.js": "/myDotaBuff/static/js/main.7fac89ea.js",
     "static/js/787.e7ff9d75.chunk.js": "/myDotaBuff/static/js/787.e7ff9d75.chunk.js",
     "static/media/dota-2-ranks-291x300.png": "/myDotaBuff/static/media/dota-2-ranks-291x300.118864b8c08560b63c16.png",
     "static/media/false.png": "/myDotaBuff/static/media/false.2a1cda0ed97ad09373fc.png",
@@ -18,12 +18,12 @@
     "static/media/preloader.svg": "/myDotaBuff/static/media/preloader.3904ad7542d89a6d4cb14b96dc30b4ad.svg",
     "index.html": "/myDotaBuff/index.html",
     "static/media/preloader4.svg": "/myDotaBuff/static/media/preloader4.ca28e21810534cb764e026a34186dcd4.svg",
-    "main.81226087.css.map": "/myDotaBuff/static/css/main.81226087.css.map",
-    "main.1ec70f11.js.map": "/myDotaBuff/static/js/main.1ec70f11.js.map",
+    "main.99be116c.css.map": "/myDotaBuff/static/css/main.99be116c.css.map",
+    "main.7fac89ea.js.map": "/myDotaBuff/static/js/main.7fac89ea.js.map",
     "787.e7ff9d75.chunk.js.map": "/myDotaBuff/static/js/787.e7ff9d75.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.81226087.css",
-    "static/js/main.1ec70f11.js"
+    "static/css/main.99be116c.css",
+    "static/js/main.7fac89ea.js"
   ]
 }
