@@ -1,6 +1,12 @@
 import { Payload, Saga } from "redux-chill";
 import { put, call } from "redux-saga/effects";
-import { getMatch, getPlayerHeroes, getWardMap, preloader } from ".";
+import {
+  getHistograms,
+  getMatch,
+  getPlayerHeroes,
+  getWardMap,
+  preloader,
+} from ".";
 import { PreloaderEnum } from "../../../../types/preloader";
 
 import { SagasContext } from "../../config/sagas-context";
@@ -113,6 +119,26 @@ class GeneralSaga {
       console.log(error, "error");
     } finally {
       yield put(preloader.hide(PreloaderEnum.GetWardmap));
+    }
+  }
+
+  @Saga(getHistograms)
+  public *getHistograms(
+    payload: Payload<typeof getHistograms>,
+    { api }: SagasContext
+  ) {
+    try {
+      yield put(preloader.show(PreloaderEnum.GetHistogram));
+      const response: object[] = yield call(
+        api.general.getHistogram,
+        payload.id,
+        payload.field
+      );
+      yield put(getHistograms.submit(response));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      yield put(preloader.hide());
     }
   }
 

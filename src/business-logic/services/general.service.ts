@@ -90,6 +90,12 @@ class GeneralService {
       .then((res) => res.data);
   };
 
+  public getHistogram = (id: string, field: string) => {
+    return axios
+      .get(`${this.baseUrl}/players/${id}/histograms/${field}`)
+      .then((res) => res.data);
+  };
+
   //   public fetchEl = (id) => {
   //     return allEl;
   //   };

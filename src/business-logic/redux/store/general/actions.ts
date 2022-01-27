@@ -33,6 +33,9 @@ const getWardMap = make("[general] get ward map data")
   .stage((payload: string) => payload)
   .stage("submit", (payload: any) => payload);
 
+const getHistograms = make("[general] get histograms")
+  .stage((payload: { id: string; field: string }) => payload)
+  .stage("submit", (payload: object[]) => payload);
 export {
   getheroes,
   search,
@@ -42,4 +45,5 @@ export {
   preloader,
   getPlayerHeroes,
   getWardMap,
+  getHistograms,
 };

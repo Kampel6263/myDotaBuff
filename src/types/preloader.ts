@@ -5,4 +5,5 @@ export enum PreloaderEnum {
   SearchResult,
   GetHeroes,
   GetWardmap,
+  GetHistogram,
 }

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { NavLink, Route, Routes, useLocation } from "react-router-dom";
 import Heroes from "./heroes/heroes.component";
+import Histograms from "./histograms/histograms.component";
 import HomeProfile from "./home-profile/home-profile.component";
 import Matches from "./matches/matches.component";
 import classes from "./profile.module.scss";
@@ -42,12 +43,19 @@ const Profile = () => {
         >
           Ward map
         </NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive ? classes.active : "")}
+          to={`histograms`}
+        >
+          Histograms
+        </NavLink>
       </div>
       <Routes>
         <Route path="/" element={<HomeProfile id={id} />} />
         <Route path="/heroes" element={<Heroes id={id} />} />
         <Route path="/matches" element={<Matches id={id} />} />
         <Route path="/wardmap" element={<WardMap id={id} />} />
+        <Route path="/histograms" element={<Histograms id={id} />} />
       </Routes>
     </div>
   );

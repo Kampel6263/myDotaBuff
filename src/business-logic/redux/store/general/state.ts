@@ -14,6 +14,7 @@ class GeneralState {
   public showPreloader: number | null = null;
   public playerHeroes: object[] = [{}];
   public wardMapData: { obs: object; sen: object } = { obs: {}, sen: {} };
+  public histograms: { x: number; games: number; win: number }[] = [];
 }
 
 export { GeneralState };

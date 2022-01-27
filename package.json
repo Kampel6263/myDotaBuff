@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://Kampel6263.github.io/myDotaBuff/",
   "dependencies": {
+    "@nivo/bar": "^0.79.1",
     "@nivo/core": "^0.79.0",
     "@nivo/heatmap": "^0.79.1",
     "@nivo/legends": "^0.79.1",
