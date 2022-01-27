@@ -4,12 +4,13 @@ import Heroes from "./heroes/heroes.component";
 import HomeProfile from "./home-profile/home-profile.component";
 import Matches from "./matches/matches.component";
 import classes from "./profile.module.scss";
+import WardMap from "./ward-map/ward-map.component";
 
 const Profile = () => {
   const location = useLocation();
 
   let id = location.pathname.split("/")[2];
-
+  console.log("render");
   return (
     <div>
       <div className={classes.profileNavigation}>
@@ -35,11 +36,18 @@ const Profile = () => {
         >
           Matches
         </NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive ? classes.active : "")}
+          to={`wardmap`}
+        >
+          Ward map
+        </NavLink>
       </div>
       <Routes>
         <Route path="/" element={<HomeProfile id={id} />} />
         <Route path="/heroes" element={<Heroes id={id} />} />
         <Route path="/matches" element={<Matches id={id} />} />
+        <Route path="/wardmap" element={<WardMap id={id} />} />
       </Routes>
     </div>
   );

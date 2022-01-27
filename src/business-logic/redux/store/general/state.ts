@@ -13,6 +13,7 @@ class GeneralState {
   public matchDetails: object = {};
   public showPreloader: number | null = null;
   public playerHeroes: object[] = [{}];
+  public wardMapData: { obs: object; sen: object } = { obs: {}, sen: {} };
 }
 
 export { GeneralState };

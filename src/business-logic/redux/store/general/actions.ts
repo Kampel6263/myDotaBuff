@@ -29,6 +29,10 @@ const getPlayerHeroes = make("[general] get player heroes")
   .stage((payload: { id: string; limit: number }) => payload)
   .stage("submit", (payload: object[]) => payload);
 
+const getWardMap = make("[general] get ward map data")
+  .stage((payload: string) => payload)
+  .stage("submit", (payload: any) => payload);
+
 export {
   getheroes,
   search,
@@ -37,4 +41,5 @@ export {
   getMatch,
   preloader,
   getPlayerHeroes,
+  getWardMap,
 };

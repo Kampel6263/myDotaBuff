@@ -13,7 +13,7 @@ type PlayerProps = {
 };
 
 const Player: React.FC<PlayerProps> = ({ el, columsName, index }) => {
-  const { heroesImg, heroes } = useHeroesData();
+  const { heroes, baseUrl } = useHeroesData();
   const navigate = useNavigate();
   if (columsName) {
     return (
@@ -34,7 +34,9 @@ const Player: React.FC<PlayerProps> = ({ el, columsName, index }) => {
     >
       <div className={classes.heroImg}>
         <img
-          src={heroesImg.filter((hero) => hero.id === el.hero_id)[0]?.src}
+          src={
+            baseUrl + heroes.filter((hero) => hero.id === el.hero_id)[0]?.img
+          }
           alt={
             heroes.filter((hero) => hero.id === el.hero_id)[0]?.localized_name
           }

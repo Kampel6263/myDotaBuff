@@ -84,6 +84,12 @@ class GeneralService {
       .then((res) => res.data);
   };
 
+  public getWardMap = (id: string) => {
+    return axios
+      .get(`${this.baseUrl}/players/${id}/wardmap`)
+      .then((res) => res.data);
+  };
+
   //   public fetchEl = (id) => {
   //     return allEl;
   //   };

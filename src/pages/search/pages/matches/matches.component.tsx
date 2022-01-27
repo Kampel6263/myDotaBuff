@@ -9,7 +9,7 @@ import classes from "./matches.module.scss";
 const Matches: React.FC<{ id: string }> = ({ id }) => {
   const { profileRecentMatches, maxDuration, showPreloader } =
     UseHomeProfileData();
-
+  console.log(id, "id");
   const dispatch = useDispatch();
 
   useEffect(() => {

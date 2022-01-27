@@ -4,4 +4,5 @@ export enum PreloaderEnum {
   MatchDetail,
   SearchResult,
   GetHeroes,
+  GetWardmap,
 }

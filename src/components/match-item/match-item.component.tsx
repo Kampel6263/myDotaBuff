@@ -27,7 +27,7 @@ type MatchItemProps = {
 };
 
 const MatchItem: React.FC<MatchItemProps> = ({ matchDetails, maxDuration }) => {
-  const { heroesImg } = useHeroesData();
+  const { baseUrl } = useHeroesData();
   const navigate = useNavigate();
   const { heroes } = useSelector(
     (
@@ -56,7 +56,8 @@ const MatchItem: React.FC<MatchItemProps> = ({ matchDetails, maxDuration }) => {
       <div className={classes.img}>
         <img
           src={
-            heroesImg?.filter((img) => img.id === matchDetails.hero_id)[0]?.src
+            baseUrl +
+            heroes?.filter((img) => img.id === matchDetails.hero_id)[0]?.img
           }
           alt=""
         />

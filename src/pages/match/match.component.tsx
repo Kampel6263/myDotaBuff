@@ -8,7 +8,6 @@ import { getMatch } from "../../business-logic/redux/store/general";
 import Preloader from "../../components/preloader/preloader.coponent";
 import Title from "../../components/title/title.component";
 import { PreloaderEnum } from "../../types/preloader";
-import { useHeroesData } from "../heroes/heroes.hook";
 import { matchDetail } from "./match.hook";
 import classes from "./match.module.scss";
 import Player from "./player/player.component";

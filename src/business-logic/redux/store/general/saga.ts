@@ -1,6 +1,6 @@
 import { Payload, Saga } from "redux-chill";
 import { put, call } from "redux-saga/effects";
-import { getMatch, getPlayerHeroes, preloader } from ".";
+import { getMatch, getPlayerHeroes, getWardMap, preloader } from ".";
 import { PreloaderEnum } from "../../../../types/preloader";
 
 import { SagasContext } from "../../config/sagas-context";
@@ -98,6 +98,21 @@ class GeneralSaga {
     } catch (error) {
     } finally {
       yield put(preloader.hide(PreloaderEnum.Profile));
+    }
+  }
+  @Saga(getWardMap)
+  public *getWardMap(
+    payload: Payload<typeof getWardMap>,
+    { api }: SagasContext
+  ) {
+    try {
+      yield put(preloader.show(PreloaderEnum.GetWardmap));
+      const response: object = yield call(api.general.getWardMap, payload);
+      yield put(getWardMap.submit(response));
+    } catch (error) {
+      console.log(error, "error");
+    } finally {
+      yield put(preloader.hide(PreloaderEnum.GetWardmap));
     }
   }
 

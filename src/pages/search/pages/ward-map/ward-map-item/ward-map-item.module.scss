@@ -1,0 +1,29 @@
+@import "../../../../../styles/media.scss";
+
+.map {
+  width: 330px;
+  height: 330px;
+  background: url("https://www.opendota.com/assets/images/dota2/map/detailed_723.webp")
+    center no-repeat;
+  background-size: cover;
+  @include tablet() {
+    width: 360px;
+    height: 360px;
+  }
+  @include desktop() {
+    width: 570px;
+    height: 570px;
+  }
+  &.yellow {
+    circle {
+      fill: rgb(255, 230, 0);
+      opacity: 1;
+    }
+  }
+  &.blue {
+    circle {
+      fill: rgb(0, 162, 255);
+      opacity: 0.5;
+    }
+  }
+}

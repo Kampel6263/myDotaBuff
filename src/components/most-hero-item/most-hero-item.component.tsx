@@ -4,13 +4,14 @@ import { playerHeroesType } from "../../pages/search/pages/home-profile/home.hoo
 import classes from "./most-hero-item.module.scss";
 
 const MostHeroItem: React.FC<{ el: playerHeroesType }> = ({ el }) => {
-  const { heroesImg } = useHeroesData();
+  const { baseUrl, heroes } = useHeroesData();
 
   return (
     <div className={classes.hero}>
       <img
         src={
-          heroesImg?.filter((hero) => String(hero.id) === el.hero_id)[0]?.src
+          baseUrl +
+          heroes?.filter((hero) => String(hero.id) === el.hero_id)[0]?.img
         }
         alt=""
       />

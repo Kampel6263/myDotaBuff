@@ -23,6 +23,7 @@ import PreloaderAnimation2 from "./assets/animation/preloader.svg";
 import PreloaderAnimation3 from "./assets/animation/preloader2.svg";
 import PreloaderAnimation4 from "./assets/animation/preloader3.svg";
 import PreloaderAnimation5 from "./assets/animation/preloader4.svg";
+import HeroDesc from "./pages/heroes/hero-desc/hero-desc.component";
 const App = () => {
   return (
     <div className={classes.app}>
@@ -41,6 +42,7 @@ const App = () => {
             element={<Navigate replace to="/search" />}
           />
           <Route path="/match/:id" element={<Match />} />
+          <Route path="/heroes/:id" element={<HeroDesc />} />
           <Route
             path="/preloaders"
             element={

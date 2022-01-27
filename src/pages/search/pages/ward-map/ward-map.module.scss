@@ -1,0 +1,17 @@
+@import "../../../../styles/media.scss";
+
+.maps {
+  width: 100%;
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: space-between;
+  row-gap: 20px;
+  @include tablet() {
+    grid-template-columns: auto auto;
+  }
+}
+
+.title {
+  margin-top: 40px;
+}
