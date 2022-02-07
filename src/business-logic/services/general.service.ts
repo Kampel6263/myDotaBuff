@@ -1,5 +1,6 @@
 import axios from "axios";
-import { ProfileRecentMatches } from "../../pages/search/pages/home-profile/home-profile.component";
+import { ProfileRecentMatches } from "../../pages/search/pages/profile.hook";
+
 import { HttpService } from "./http";
 
 // const allEl = [];

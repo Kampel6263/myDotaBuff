@@ -1,28 +1,46 @@
-@import "../../../styles/media.scss";
-
-.profileNavigation {
-  margin-top: 10px;
-  @include tablet() {
-    margin-top: 25px;
+@import "../../styles/media.scss";
+.header {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  grid-template-rows: repeat(7, auto);
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 10px;
+  row-gap: 5px;
+  font-size: 12px;
+  & > div {
+    width: max-content;
   }
-  a {
-    display: inline-block;
-    color: #000;
-    padding: 5px 10px;
-    background: #7a7a7a;
-    text-decoration: none;
-    margin-right: 3px;
-    font-size: 13px;
+  @include tablet() {
+    grid-auto-flow: column;
+    grid-template-columns: 200px 1fr auto;
+    font-size: 16px;
+  }
+  img {
+    grid-row: 7 span;
+  }
+  .calendar {
+    grid-row: 7 span;
+    grid-column: 2 span;
     @include tablet() {
-      padding: 10px 20px;
-      font-size: 16px;
+      grid-column: 1 span;
     }
-    &:hover {
-      background: rgb(140, 140, 140);
-    }
-    &.active {
-      background: rgb(197, 197, 197);
-      font-weight: 500;
+  }
+  div {
+    color: rgb(240, 255, 246);
+    span {
+      font-size: 12px;
+      opacity: 0.8;
+      color: #fff;
+      &.winRateToday {
+        margin-left: 6px;
+        font-size: 10px;
+        @include tablet() {
+          font-size: 14px;
+          margin-left: 10px;
+        }
+      }
     }
   }
 }

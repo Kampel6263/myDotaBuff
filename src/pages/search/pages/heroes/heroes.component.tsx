@@ -1,18 +1,11 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getPlayerHeroes } from "../../../../business-logic/redux/store";
+import React from "react";
 import MostHeroItem from "../../../../components/most-hero-item/most-hero-item.component";
 import Preloader from "../../../../components/preloader/preloader.coponent";
-import { UseHomeProfileData } from "../home-profile/home.hook";
+import { playerHeroesType } from "../profile.hook";
 import classes from "./heroes.module.scss";
-const Heroes: React.FC<{ id: string }> = ({ id }) => {
-  const { playerHeroes } = UseHomeProfileData();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPlayerHeroes({ id: id, limit: 0 }));
-  }, []);
-  //   console.log(!!playerHeroes[0].games, "!!!");
+const Heroes: React.FC<{ playerHeroes: playerHeroesType[] }> = ({
+  playerHeroes,
+}) => {
   if (playerHeroes.length === 0 || !playerHeroes[0].games) {
     return <Preloader />;
   }
@@ -37,4 +30,4 @@ const Heroes: React.FC<{ id: string }> = ({ id }) => {
   );
 };
 
-export default Heroes;
+export default React.memo(Heroes);

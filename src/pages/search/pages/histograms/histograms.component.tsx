@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { State } from "../../../../business-logic/redux/config";
 import { getHistograms } from "../../../../business-logic/redux/store";
@@ -8,10 +8,11 @@ import classes from "./histograms.module.scss";
 import { ResponsiveBar } from "@nivo/bar";
 import { PreloaderEnum } from "../../../../types/preloader";
 import Preloader from "../../../../components/preloader/preloader.coponent";
+import { UseProfileData } from "../profile.hook";
 
 const Histograms: React.FC<{ id: string }> = ({ id }) => {
   const dispatch = useDispatch();
-
+  const { getColor } = UseProfileData();
   const [currentFilter, setCurrentFilter] = useState<string>("kills");
 
   useEffect(() => {
@@ -27,33 +28,29 @@ const Histograms: React.FC<{ id: string }> = ({ id }) => {
     } => state.general
   );
 
-  // console.log(histograms, "hist");
-
-  let newData = histograms.map((el) => ({
-    game: el.games,
-    [currentFilter]: el.x,
-    borderColor: `rgb(${(1 - el.win / el.games) * 255},${
-      (el.win / el.games) * 255
-    },0)`,
-    color: `rgba(${(1 - el.win / el.games) * 255},${
-      (el.win / el.games) * 255
-    },0, 0.7)`,
-  }));
+  let newData = useMemo(() => {
+    return histograms.map((el) => ({
+      game: el.games,
+      win: el.win,
+      [currentFilter]: el.x,
+      borderColor: getColor("a", el.win / el.games, 0.7),
+      color: getColor("a", el.win / el.games, 0.5),
+    }));
+  }, [histograms]);
 
   let maxX = 0;
-
   for (let el of newData) {
     if (el[currentFilter] > maxX && el.game !== 0) {
       maxX = Number(el[currentFilter]);
     }
   }
 
-  newData = newData.filter((el) => el[currentFilter] <= maxX);
+  newData = newData.slice(0, 20);
 
-  console.log(newData, "newData", maxX);
-  if (showPreloader === PreloaderEnum.GetHistogram) {
+  if (showPreloader === PreloaderEnum.GetHistogram || newData.length === 0) {
     return <Preloader />;
   }
+
   return (
     <div className={classes.histograms}>
       <Title className={classes.title}>Histograms</Title>
@@ -79,7 +76,6 @@ const Histograms: React.FC<{ id: string }> = ({ id }) => {
               <option value="tower_damage">Tower Damage</option>
               <option value="tower_kills">Tower Kills</option>
               <option value="pings">Map Pings</option>
-
               {/* <option value="blue">Blue</option> */}
             </Field>
           </Form>
@@ -100,6 +96,19 @@ const Histograms: React.FC<{ id: string }> = ({ id }) => {
           colors={(d) => d.data.color}
           axisRight={null}
           borderColor={(d) => d.data.data.borderColor}
+          tooltip={({ data }) => (
+            <div className={classes.interactive}>
+              <div>Win: {data.win}</div>
+              <div>Lose: {data.game - data.win}</div>
+              <div
+                style={{
+                  color: getColor("a", data.win / data.game),
+                }}
+              >
+                Win rate: {String((data.win / data.game) * 100).slice(0, 4)}%
+              </div>
+            </div>
+          )}
           axisBottom={{
             tickSize: 5,
             tickPadding: 5,
@@ -120,31 +129,6 @@ const Histograms: React.FC<{ id: string }> = ({ id }) => {
           labelSkipWidth={12}
           labelSkipHeight={12}
           labelTextColor={"#fff"}
-          legends={[
-            {
-              dataFrom: "keys",
-              anchor: "bottom-right",
-              direction: "column",
-              itemTextColor: "white",
-              justify: false,
-              translateX: 120,
-              translateY: 0,
-              itemsSpacing: 2,
-              itemWidth: 100,
-              itemHeight: 20,
-              itemDirection: "left-to-right",
-              itemOpacity: 0.85,
-              symbolSize: 20,
-              effects: [
-                {
-                  on: "hover",
-                  style: {
-                    itemOpacity: 1,
-                  },
-                },
-              ],
-            },
-          ]}
           role="application"
           ariaLabel="Nivo bar chart demo"
           barAriaLabel={function (e) {
@@ -156,4 +140,4 @@ const Histograms: React.FC<{ id: string }> = ({ id }) => {
   );
 };
 
-export default Histograms;
+export default React.memo(Histograms);

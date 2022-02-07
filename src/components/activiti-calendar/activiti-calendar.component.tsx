@@ -1,11 +1,12 @@
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { date } from "yup/lib/locale";
-import { UseHomeProfileData } from "../../pages/search/pages/home-profile/home.hook";
+import { UseProfileData } from "../../pages/search/pages/profile.hook";
+
 import classes from "./activiti-calendar.module.scss";
 
 const ActivitiCalendar = () => {
-  const { profileRecentMatches } = UseHomeProfileData();
+  const { profileRecentMatches, getColor } = UseProfileData();
   const daysCount = 91;
   const [arrForCalendar, setArrForCalendar] = useState<
     { games: number; wins: number; date: string }[]
@@ -81,9 +82,7 @@ const ActivitiCalendar = () => {
             style={{
               width: `${el.games !== 0 ? el.games + 1 : 0}px`,
               height: `${el.games !== 0 ? el.games + 1 : 0}px`,
-              background: `rgb(${255 * (1 - el.wins / el.games)}, ${
-                (255 * el.wins) / el.games
-              }, 0`,
+              background: getColor("a", el.wins / el.games),
             }}
           ></div>
           <div className={classes.detail}>

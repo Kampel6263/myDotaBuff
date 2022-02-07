@@ -4,11 +4,14 @@ import { useSelector } from "react-redux";
 import { State } from "../../business-logic/redux/config";
 import { HeroeProps } from "../../pages/heroes/heroes.component";
 import { useHeroesData } from "../../pages/heroes/heroes.hook";
-import { ProfileRecentMatches } from "../../pages/search/pages/home-profile/home-profile.component";
 import classes from "./match-item.module.scss";
 
 import * as dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
+import {
+  ProfileRecentMatches,
+  UseProfileData,
+} from "../../pages/search/pages/profile.hook";
 
 declare module "dayjs" {
   interface Dayjs {
@@ -28,6 +31,7 @@ type MatchItemProps = {
 
 const MatchItem: React.FC<MatchItemProps> = ({ matchDetails, maxDuration }) => {
   const { baseUrl } = useHeroesData();
+  const { getColor } = UseProfileData();
   const navigate = useNavigate();
   const { heroes } = useSelector(
     (
@@ -114,7 +118,7 @@ const MatchItem: React.FC<MatchItemProps> = ({ matchDetails, maxDuration }) => {
         <span>{matchDetails.assists}</span>
         <span
           className={classes.lstKda}
-          style={{ color: `rgb(${(1 - kda / 8) * 255}, ${(kda / 8) * 255}, 0` }}
+          style={{ color: getColor("a", kda / 8) }}
         >
           {" "}
           (KDA: {String(kda).slice(0, 4)})

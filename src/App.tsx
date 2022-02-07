@@ -8,7 +8,6 @@ import {
   Router,
   Routes,
 } from "react-router-dom";
-import Home from "./pages/home/home.component";
 import Heroes from "./pages/heroes/heroes.component";
 import Navigation from "./components/navigation/navigation.component";
 import Search from "./pages/search/search.component";
@@ -28,19 +27,13 @@ const App = () => {
   return (
     <div className={classes.app}>
       <div className={classes.container}>
-        {/* <BrowserRouter> */}
         <Navigation />
         <Routes>
           <Route path="/" element={<Navigate replace to="/heroes/" />} />
-          {/* <Route path="/home/" element={<Home />} /> */}
           <Route path="/heroes/" element={<Heroes />} />
           <Route path="/search/:name" element={<Search />} />
           <Route path="/search/" element={<Search />} />
           <Route path="/profile/:id/*" element={<Profile />} />
-          <Route
-            path="/search/profile/"
-            element={<Navigate replace to="/search" />}
-          />
           <Route path="/match/:id" element={<Match />} />
           <Route path="/heroes/:id" element={<HeroDesc />} />
           <Route
@@ -68,7 +61,6 @@ const App = () => {
             }
           />
         </Routes>
-        {/* </BrowserRouter> */}
       </div>
     </div>
   );
