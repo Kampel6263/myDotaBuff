@@ -46,6 +46,7 @@ const HomeProfile: React.FC<HomeProfileProps> = ({
 
           <div className={classes.playerHeroes}>
             <div className={classes.hero}>
+              <div>#</div>
               <div>Hero</div>
               <div>Matches</div>
               <div>Win</div>
@@ -53,7 +54,7 @@ const HomeProfile: React.FC<HomeProfileProps> = ({
               <div>Win rate</div>
             </div>
             {playerHeroes.slice(0, 7).map((el, i) => (
-              <MostHeroItem el={el} key={i} />
+              <MostHeroItem el={el} key={i} index={i} />
             ))}
           </div>
           <div

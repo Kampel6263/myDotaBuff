@@ -7,12 +7,16 @@ import {
 
 import classes from "./most-hero-item.module.scss";
 
-const MostHeroItem: React.FC<{ el: playerHeroesType }> = ({ el }) => {
+const MostHeroItem: React.FC<{ el: playerHeroesType; index: number }> = ({
+  el,
+  index,
+}) => {
   const { baseUrl, heroes } = useHeroesData();
   const { getColor } = UseProfileData();
   const winRate = el.win / el.games;
   return (
     <div className={classes.hero}>
+      <div>{index + 1}</div>
       <img
         src={
           baseUrl +

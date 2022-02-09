@@ -9,7 +9,6 @@ const HeroDesc = () => {
   let id = location.pathname.split("/")[2];
   const hero = heroes?.filter((el) => el.id + "" === id)[0];
 
-  console.log(hero);
   if (!attr?.str || !heroes[0]?.localized_name || !hero?.localized_name) {
     return <Preloader />;
   }

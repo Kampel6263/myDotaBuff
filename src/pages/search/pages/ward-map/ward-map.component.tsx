@@ -27,9 +27,6 @@ const WardMap: React.FC<{ id: string }> = ({ id }) => {
       showPreloader: number | null;
     } => state.general
   );
-  const [activeEl, setActiveEl] = useState<
-    "blue" | "green" | "orange" | "red" | ""
-  >("");
   useEffect(() => {
     dispatch(getWardMap(id));
 
@@ -48,38 +45,8 @@ const WardMap: React.FC<{ id: string }> = ({ id }) => {
     <div className={classes.wardMap}>
       <Title className={classes.title}>Ward map</Title>
       <div className={classes.maps}>
-        <WardMapItem data={wardMapData.obs} activeEl={activeEl} type="obs" />
-        <WardMapItem data={wardMapData.sen} activeEl={activeEl} type="sen" />
-      </div>
-      <div className={classes.indicators}>
-        <div
-          onMouseEnter={() => setActiveEl("blue")}
-          onMouseLeave={() => setActiveEl("")}
-          className={classes.blue}
-        >
-          0-3
-        </div>
-        <div
-          onMouseEnter={() => setActiveEl("green")}
-          onMouseLeave={() => setActiveEl("")}
-          className={classes.green}
-        >
-          3-6
-        </div>
-        <div
-          onMouseEnter={() => setActiveEl("orange")}
-          onMouseLeave={() => setActiveEl("")}
-          className={classes.orange}
-        >
-          6-9
-        </div>
-        <div
-          onMouseEnter={() => setActiveEl("red")}
-          onMouseLeave={() => setActiveEl("")}
-          className={classes.red}
-        >
-          9+
-        </div>
+        <WardMapItem data={wardMapData.obs} type="obs" />
+        <WardMapItem data={wardMapData.sen} type="sen" />
       </div>
     </div>
   );

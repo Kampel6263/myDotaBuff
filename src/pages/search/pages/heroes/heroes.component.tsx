@@ -16,6 +16,7 @@ const Heroes: React.FC<{ playerHeroes: playerHeroesType[] }> = ({
           Most played heroes({playerHeroes.length})
         </div>
         <div className={classes.hero}>
+          <div>#</div>
           <div>Hero</div>
           <div>Matches</div>
           <div>Win</div>
@@ -23,7 +24,7 @@ const Heroes: React.FC<{ playerHeroes: playerHeroesType[] }> = ({
           <div>Win rate</div>
         </div>
         {playerHeroes?.map((el, i) => (
-          <MostHeroItem el={el} key={i} />
+          <MostHeroItem el={el} key={i} index={i} />
         ))}
       </div>
     </div>

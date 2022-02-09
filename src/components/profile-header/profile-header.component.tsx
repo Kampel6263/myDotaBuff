@@ -5,7 +5,10 @@ import classes from "./profile-header.module.scss";
 
 const ProfileHeader = () => {
   const { profile, winRateToday, winRate, getColor } = UseProfileData();
-
+  const rankTier = profile?.profile?.rank_tier
+    ? String(profile?.profile?.rank_tier).split("")[0]
+    : "0";
+  const starCount = String(profile?.profile?.rank_tier).split("")[1];
   return (
     <div className={classes.header}>
       <img src={profile?.profile.profile?.avatarfull} alt="" />
@@ -16,22 +19,16 @@ const ProfileHeader = () => {
         <span>Nick name:</span> {profile?.profile.profile?.personaname}{" "}
         <div className={classes.rang}>
           <div className={classes.stars}>
-            {profile?.profile?.rank_tier && (
+            {rankTier !== "0" && starCount !== "0" && (
               <img
                 className={classes.star}
-                src={`https://www.opendota.com/assets/images/dota2/rank_icons/rank_star_${
-                  String(profile?.profile?.rank_tier).split("")[1]
-                }.png`}
+                src={`https://www.opendota.com/assets/images/dota2/rank_icons/rank_star_${starCount}.png`}
               />
             )}
           </div>
           <img
             className={classes.rangImg}
-            src={`https://www.opendota.com/assets/images/dota2/rank_icons/rank_icon_${
-              profile?.profile?.rank_tier
-                ? String(profile?.profile?.rank_tier).split("")[0]
-                : "0"
-            }.png`}
+            src={`https://www.opendota.com/assets/images/dota2/rank_icons/rank_icon_${rankTier}.png`}
           />
         </div>
       </div>
