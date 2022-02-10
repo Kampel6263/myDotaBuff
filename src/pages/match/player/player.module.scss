@@ -1,0 +1,52 @@
+@import "../../../styles/media.scss";
+
+.player {
+  display: grid;
+  column-gap: 7px;
+  grid-template-columns: 40px 50px repeat(8, 1fr);
+  grid-template-rows: 31px;
+  align-items: center;
+
+  @include tablet() {
+    grid-template-columns: 1fr 3fr repeat(9, 1fr);
+    grid-template-rows: 51px;
+  }
+  &.grey {
+    background: rgb(41, 41, 41);
+  }
+  div {
+    font-size: 9px;
+    &:nth-child(10) {
+      display: none;
+    }
+    @include tablet() {
+      font-size: 13px;
+      &:nth-child(10) {
+        display: block;
+      }
+    }
+  }
+}
+
+.activeId {
+  color: rgb(126, 255, 126);
+  cursor: pointer;
+}
+
+.netWorth {
+  color: rgb(255, 205, 66);
+}
+
+.heroImg {
+  position: relative;
+  img {
+    display: block;
+  }
+  div {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1px 4px;
+  }
+}

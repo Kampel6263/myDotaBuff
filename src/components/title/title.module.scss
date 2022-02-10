@@ -1,0 +1,9 @@
+@import "../../styles/media.scss";
+
+.title {
+  font-size: 18px;
+  font-weight: 500;
+  @include tablet() {
+    font-size: 26px;
+  }
+}

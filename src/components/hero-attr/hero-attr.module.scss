@@ -1,0 +1,27 @@
+img {
+  max-width: 100%;
+}
+.hero {
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 4px 4px 8px 0px rgba(255, 255, 255, 0.1);
+  &:hover {
+    transform: scale(1.1);
+  }
+  .heroImg {
+    min-height: 103px;
+    min-width: 100%;
+    background: url("https://provbiz.ru/wp-content/themes/provbiz2/images/placeholder.png")
+      center no-repeat;
+    background-size: cover;
+  }
+  .attr {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    img {
+      width: 30px;
+      margin-right: 10px;
+    }
+  }
+}
