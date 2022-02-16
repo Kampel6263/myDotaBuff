@@ -6,6 +6,10 @@
   }
 }
 
+h2 {
+  margin-top: 40px;
+}
+
 .result {
   display: grid;
   margin-top: 70px;
@@ -107,6 +111,12 @@ button {
   text-decoration: none;
   margin-left: 10px;
   transition: 0.1s;
+  &.secondary {
+    margin-left: 5px;
+    @include tablet() {
+      margin-left: 10px;
+    }
+  }
   @include tablet() {
     margin-left: 20px;
     font-size: 13px;

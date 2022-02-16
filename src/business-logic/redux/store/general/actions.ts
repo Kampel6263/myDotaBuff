@@ -36,6 +36,12 @@ const getWardMap = make("[general] get ward map data")
 const getHistograms = make("[general] get histograms")
   .stage((payload: { id: string; field: string }) => payload)
   .stage("submit", (payload: object[]) => payload);
+
+const getItems = make("[general] get all items").stage(
+  "submit",
+  (payload: object[]) => payload
+);
+
 export {
   getheroes,
   search,
@@ -46,4 +52,5 @@ export {
   getPlayerHeroes,
   getWardMap,
   getHistograms,
+  getItems,
 };

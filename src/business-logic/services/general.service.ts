@@ -62,7 +62,6 @@ class GeneralService {
         const data: ProfileRecentMatches[] = res.data;
         return data;
       });
-
     return matches.map((el, i) => {
       let isWin = false;
       for (let i = 0; i < winMatches.length; i++) {
@@ -70,6 +69,7 @@ class GeneralService {
           isWin = true;
         }
       }
+
       return isWin ? { ...el, win: true } : el;
     });
   };
@@ -95,6 +95,9 @@ class GeneralService {
     return axios
       .get(`${this.baseUrl}/players/${id}/histograms/${field}`)
       .then((res) => res.data);
+  };
+  public getItems = () => {
+    return axios.get(`${this.baseUrl}/constants/items`).then((res) => res.data);
   };
 
   //   public fetchEl = (id) => {

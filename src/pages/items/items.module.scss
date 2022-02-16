@@ -1,0 +1,42 @@
+@import "../../styles/media.scss";
+
+.itemMap {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  @include tablet() {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  @include desktop() {
+    grid-template-columns: repeat(8, 1fr);
+  }
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  @include tablet() {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+h2 {
+  font-size: 28px;
+}
+
+.title {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+.neitralTitle {
+  margin: 15px 0 5px;
+}
+
+.type {
+  .title {
+    &:not(:first-child) {
+      margin-top: 20px;
+    }
+  }
+}

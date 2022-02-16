@@ -44,7 +44,10 @@ const Match = () => {
     }
   }, []);
 
-  if (showPreloader === PreloaderEnum.MatchDetail) {
+  if (
+    showPreloader === PreloaderEnum.MatchDetail ||
+    matchDetails?.players?.length === 0
+  ) {
     return <Preloader />;
   }
 

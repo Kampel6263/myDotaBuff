@@ -1,0 +1,48 @@
+.header {
+  display: flex;
+  & > img {
+    width: 100%;
+    max-width: 55px;
+    height: auto;
+    margin-right: 10px;
+  }
+  .name {
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .сost {
+    display: flex;
+    margin-top: 4px;
+    img {
+      width: 15px;
+      margin-right: 5px;
+    }
+  }
+}
+.attr {
+  margin-top: 10px;
+  font-size: 14px;
+  & > div {
+    color: rgba($color: #fff, $alpha: 0.6);
+    line-height: 1.5;
+    & > span {
+      color: #fff;
+    }
+  }
+}
+.activate {
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 10px;
+  margin-top: 10px;
+  background: #555555;
+  color: black;
+}
+.lore {
+  margin-top: 10px;
+  color: rgb(138, 138, 138);
+  background-color: #161616;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 10px;
+}

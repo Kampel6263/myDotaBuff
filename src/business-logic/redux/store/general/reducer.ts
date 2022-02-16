@@ -1,13 +1,17 @@
 import { reducer } from "redux-chill";
 import { GeneralState } from "./state";
-import { getheroes, search, getProfile, preloader } from "./actions";
 import {
+  getheroes,
+  search,
+  getProfile,
+  preloader,
+  getItems,
   getHistograms,
   getMatch,
   getPlayerHeroes,
   getProfileMatches,
   getWardMap,
-} from ".";
+} from "./actions";
 
 /**
  * general state
@@ -61,7 +65,11 @@ const general = reducer(new GeneralState())
     (state: { histograms: object[] }, payload: object[]) => {
       state.histograms = payload;
     }
-  );
+  )
+  .on(getItems.submit, (state: { items: object[] }, payload: object[]) => {
+    state.items = payload;
+  });
+
 //   .on(addEl.sumbit, (state, payload) => {
 //     state.data = payload;
 //   })

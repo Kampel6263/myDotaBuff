@@ -1,8 +1,10 @@
 import dayjs from "dayjs";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { State } from "../../../business-logic/redux/config";
+import { getItems } from "../../../business-logic/redux/store";
 import { HeroeProps } from "../../heroes/heroes.component";
+import { ItemType } from "../../items/items.component";
 
 export type ProfileType = {
   profile: allProfileProps;
@@ -77,6 +79,31 @@ export type playerHeroesType = {
 };
 
 const UseProfileData = () => {
+  const [itemsArray, setItemsArray] = useState<ItemType[]>([]);
+  const { items } = useSelector(
+    (state: State): { items: { id: number }[] } => state.general
+  );
+  const createArrayWithItems = (itmObj: any): Array<ItemType> => {
+    const array = [];
+
+    for (let el in itmObj) {
+      array.push(itmObj[el]);
+    }
+
+    return array
+      .sort((a, b) => a.cost - b.cost)
+      .filter(
+        (el) =>
+          el.id !== 1032 && el.id !== 725 && el.id !== 727 && el.id !== 655
+      );
+  };
+
+  useEffect(() => {
+    if (items) {
+      setItemsArray(createArrayWithItems(items));
+    }
+  }, [items]);
+
   const { profile, profileRecentMatches, heroes, showPreloader, playerHeroes } =
     useSelector(
       (
@@ -135,6 +162,7 @@ const UseProfileData = () => {
     playerHeroes,
     winRateToday,
     winRate,
+    itemsArray,
     getColor,
   };
 };

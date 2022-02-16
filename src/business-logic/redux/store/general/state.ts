@@ -15,6 +15,7 @@ class GeneralState {
   public playerHeroes: object[] = [{}];
   public wardMapData: { obs: object; sen: object } = { obs: {}, sen: {} };
   public histograms: { x: number; games: number; win: number }[] = [];
+  public items: object[] = [];
 }
 
 export { GeneralState };

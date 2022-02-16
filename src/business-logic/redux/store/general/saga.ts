@@ -2,6 +2,7 @@ import { Payload, Saga } from "redux-chill";
 import { put, call } from "redux-saga/effects";
 import {
   getHistograms,
+  getItems,
   getMatch,
   getPlayerHeroes,
   getWardMap,
@@ -137,6 +138,20 @@ class GeneralSaga {
       yield put(getHistograms.submit(response));
     } catch (error) {
       console.log(error);
+    } finally {
+      yield put(preloader.hide());
+    }
+  }
+
+  @Saga(getItems)
+  public *getItems(payload: Payload<typeof getItems>, { api }: SagasContext) {
+    try {
+      yield put(preloader.show(PreloaderEnum.GetItems));
+      const response: object[] = yield call(api.general.getItems);
+      // console.log(response, "items");
+      yield put(getItems.submit(response));
+    } catch (error) {
+      console.log(error, "error");
     } finally {
       yield put(preloader.hide());
     }

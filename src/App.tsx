@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import classes from "./App.module.scss";
 import {
@@ -23,7 +23,14 @@ import PreloaderAnimation3 from "./assets/animation/preloader2.svg";
 import PreloaderAnimation4 from "./assets/animation/preloader3.svg";
 import PreloaderAnimation5 from "./assets/animation/preloader4.svg";
 import HeroDesc from "./pages/heroes/hero-desc/hero-desc.component";
+import Items from "./pages/items/items.component";
+import { useDispatch } from "react-redux";
+import { getItems } from "./business-logic/redux/store";
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getItems());
+  }, []);
   return (
     <div className={classes.app}>
       <div className={classes.container}>
@@ -60,6 +67,7 @@ const App = () => {
               </div>
             }
           />
+          <Route path="/items" element={<Items />} />
         </Routes>
       </div>
     </div>

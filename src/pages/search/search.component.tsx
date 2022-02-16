@@ -10,6 +10,7 @@ import Preloader from "../../components/preloader/preloader.coponent";
 import { useSearchData } from "./search.hook";
 import dayjs from "dayjs";
 import useDebounce from "../../core/hooks/debounce.hook";
+import classNames from "classnames";
 
 type SearchResultProps = {
   account_id: number;
@@ -57,7 +58,10 @@ const Search = () => {
       <NavLink className={classes.author} to="/profile/1002753142">
         Author(kampel)
       </NavLink>
-      <NavLink className={classes.author} to="/profile/1276669669">
+      <NavLink
+        className={classNames(classes.author, classes.secondary)}
+        to="/profile/1276669669"
+      >
         Vova
       </NavLink>
       {showPreloader === PreloaderEnum.SearchResult ? (

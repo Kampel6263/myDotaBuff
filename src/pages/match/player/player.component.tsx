@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { getMatchData } from "../match.hook";
 import classes from "./player.module.scss";
 import { PlayerType } from "../match.hook";
 import { useHeroesData } from "../../heroes/heroes.hook";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
+import { useItemsData } from "../../items/items.hook";
+import Item from "../../../components/item/item.component";
+import { UseProfileData } from "../../search/pages/profile.hook";
+import { useDispatch } from "react-redux";
+import { getItems } from "../../../business-logic/redux/store";
 
 type PlayerProps = {
   el?: PlayerType;
@@ -14,6 +19,7 @@ type PlayerProps = {
 
 const Player: React.FC<PlayerProps> = ({ el, columsName, index }) => {
   const { heroes, baseUrl } = useHeroesData();
+  const { itemsArray } = UseProfileData();
   const navigate = useNavigate();
   if (columsName) {
     return (
@@ -24,6 +30,9 @@ const Player: React.FC<PlayerProps> = ({ el, columsName, index }) => {
       </div>
     );
   }
+
+  // console.log(el, "player el");
+
   return el && (index || index === 0) ? (
     <div
       className={
@@ -70,6 +79,31 @@ const Player: React.FC<PlayerProps> = ({ el, columsName, index }) => {
       <div>{Math.round(el.hero_damage / 1000)}k</div>
       <div>{el.hero_healing ? el.hero_healing : "-"}</div>
       <div>{Math.round(el.tower_damage / 1000)}k</div>
+      <div className={classes.items}>
+        <div className={classes.main}>
+          {itemsArray
+            .filter(
+              (itm) =>
+                itm.id === el.item_0 ||
+                itm.id === el.item_1 ||
+                itm.id === el.item_2 ||
+                itm.id === el.item_3 ||
+                itm.id === el.item_4 ||
+                itm.id === el.item_5
+            )
+            .map((itm, i) => (
+              <Item key={i} el={itm} position={"leftBottom"} />
+            ))}
+        </div>
+        <div className={classes.neitral}>
+          {itemsArray.filter((itm) => itm.id === el.item_neutral)[0] && (
+            <Item
+              el={itemsArray.filter((itm) => itm.id === el.item_neutral)[0]}
+              position={"leftBottom"}
+            />
+          )}
+        </div>
+      </div>
     </div>
   ) : (
     <div>No item</div>

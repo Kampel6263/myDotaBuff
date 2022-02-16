@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink, Route, Routes, useLocation } from "react-router-dom";
 import {
+  getItems,
   getPlayerHeroes,
   getProfile,
   getProfileMatches,
