@@ -3,15 +3,36 @@
 .app {
   max-width: 100%;
   overflow-x: hidden;
+
   .container {
     width: 90%;
     margin: 0 auto;
-    padding-bottom: 120px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 0 20px 120px;
+    background: rgba(36, 36, 36, 0.97);
     @include tablet() {
       max-width: 768px;
     }
     @include desktop {
       max-width: 1200px;
     }
+  }
+}
+
+.background {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: url("https://dmarket.com/blog/best-dota2-wallpapers/dota2heroes7_hu3b1dceb244ec3fefbad73471cde2e900_222198_1920x1080_resize_q75_lanczos.jpg")
+    center no-repeat;
+  background-size: cover;
+  opacity: 0.5;
+  display: none;
+  @include tablet {
+    display: block;
   }
 }

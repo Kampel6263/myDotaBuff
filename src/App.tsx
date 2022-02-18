@@ -33,6 +33,7 @@ const App = () => {
   }, []);
   return (
     <div className={classes.app}>
+      <div className={classes.background}></div>
       <div className={classes.container}>
         <Navigation />
         <Routes>

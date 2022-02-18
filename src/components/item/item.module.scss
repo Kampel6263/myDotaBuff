@@ -11,6 +11,11 @@
       }
     }
   }
+  &.neitral {
+    & > img {
+      border-radius: 15px;
+    }
+  }
 
   & > img {
     width: 100%;

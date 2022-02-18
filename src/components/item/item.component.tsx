@@ -9,9 +9,9 @@ import classes from "./item.module.scss";
 
 const Item: React.FC<{
   el: ItemType;
-  withName?: boolean;
   position?: "left" | "right" | "leftBottom" | "rightBottom";
-}> = ({ el, withName, position = "left" }) => {
+  neitral?: boolean;
+}> = ({ el, position = "left", neitral }) => {
   const { mobile } = useMedia();
 
   // console.log(el, "is mobile");
@@ -20,13 +20,12 @@ const Item: React.FC<{
   }
 
   return (
-    <div className={classes.item}>
+    <div
+      className={
+        neitral ? classNames(classes.item, classes.neitral) : classes.item
+      }
+    >
       <img src={"https://cdn.cloudflare.steamstatic.com" + el.img} alt="" />
-      {withName && (
-        <div>
-          <div>{el.qual ? el.qual : el.tier}</div>
-        </div>
-      )}
       <div className={classNames(classes.info, classes[position])}>
         <ItemInfo el={el} />
       </div>

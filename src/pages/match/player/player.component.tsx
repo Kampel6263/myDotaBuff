@@ -100,6 +100,7 @@ const Player: React.FC<PlayerProps> = ({ el, columsName, index }) => {
             <Item
               el={itemsArray.filter((itm) => itm.id === el.item_neutral)[0]}
               position={"leftBottom"}
+              neitral={true}
             />
           )}
         </div>
